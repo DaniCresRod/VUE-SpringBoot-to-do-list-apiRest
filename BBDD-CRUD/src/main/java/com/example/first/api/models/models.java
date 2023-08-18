@@ -18,6 +18,7 @@ public class models {
     @Column(name="Name")
     private String prodName;
     @Column(name="Type")
+    @Enumerated(EnumType.STRING)
     private enumType prodType ;
     @Value("Tu frase aqui")
     @Column(name="Message")
@@ -25,6 +26,7 @@ public class models {
     @Nullable
     @Value("")
     @Column(name="Size")
+    @Enumerated(EnumType.STRING)
     private enumSize prodSize;      //Dani: Revisar si da problemas el null con la enumeracion
     @Value("White")
     @Column(name="Color")

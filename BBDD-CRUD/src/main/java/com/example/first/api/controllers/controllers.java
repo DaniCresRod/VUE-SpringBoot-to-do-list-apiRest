@@ -24,7 +24,7 @@ public class controllers {
         return myService.setProduct(newProduct);
     }
 
-    @DeleteMapping(path="/{id}")
+    @DeleteMapping(path="/delete/{id}")
     public String deleteProduct(@PathVariable int id){
         return myService.deleteProduct(id);
     }
