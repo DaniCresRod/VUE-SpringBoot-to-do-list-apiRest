@@ -1,35 +1,46 @@
 <script>
-  export default {
-    data: () => ({
-      icons: [
-        'mdi-facebook',
-        'mdi-twitter',
-        'mdi-linkedin',
-        'mdi-instagram',
-      ],
-    }),
-  }
+export default {
+  data: () => ({
+    links: [
+      { name: 'Home', route: '/' },
+      { name: 'Team', route: '/team' },
+      { name: 'Services', route: '/services' },
+      { name: 'Contact Us', route: '/contact' },
+    ],
+  }),
+};
 </script>
 
 <template>
-  <v-footer class="d-flex flex-column">
-    <div class="bg-teal d-flex w-100 align-center px-4">
-      <strong>Get connected with us on social networks!</strong>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        v-for="icon in icons"
-        :key="icon"
-        class="mx-4"
-        :icon="icon"
-        variant="plain"
-        size="small"
-      ></v-btn>
-    </div>
-
-    <div class="px-4 py-2 bg-black text-center w-100">
-      {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
-    </div>
+  <v-footer class="bg-grey-lighten-1">
+    <v-row justify="center" no-gutters>
+      <router-link
+        v-for="link in links"
+        :key="link.name"
+        :to="link.route"
+        variant="text"
+        color="white"
+        class="mx-2 links"
+        rounded="x0.5"
+      >
+        {{ link.name }}
+      </router-link>
+      <v-col class="text-center mt-4 footerText" cols="12">
+        {{ new Date().getFullYear() }} — <strong>ToDs List</strong>
+      </v-col>
+    </v-row>
   </v-footer>
 </template>
+
+<style scoped>
+footer {
+  max-height: 200px;
+}
+.links {
+  color: white;
+  text-decoration: none;
+}
+.footerText{
+  color: rgba(54, 157, 178, 1);
+}
+</style>

@@ -1,10 +1,7 @@
 <template>
-  <v-main>
-    <h1>hola</h1>
-    <h2>hola</h2>
-  </v-main>
+    <form-component />
 </template>
 
 <script setup>
-
+  import FormComponent from '@/components/FormComponent.vue';
 </script>
