@@ -1,5 +1,14 @@
-<script setup>
-  import { ref, watch } from 'vue';
+<script>
+export default {
+  data: () => ({
+    links: [
+      { name: 'Favourites', 
+        route: '/favourites' },
+    ],
+  }),
+};
+
+import { ref, watch } from 'vue';
 
 const drawer = ref(false);
 const group = ref(null);
@@ -38,6 +47,8 @@ watch(group, () => {
         <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
 
         <v-spacer></v-spacer>
+
+        <v-btn variant="text" icon="mdi-heart" v-for="link in links" :key="link.name" :to="link.route"></v-btn>
 
         <v-btn variant="text" icon="mdi-filter"></v-btn>
 
