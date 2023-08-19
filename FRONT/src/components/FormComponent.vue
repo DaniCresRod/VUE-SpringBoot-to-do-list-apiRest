@@ -14,6 +14,25 @@
         'Taza',
         'Botella',
       ],
+
+      size:[
+        'S',
+        'M',
+        'L',
+        'XL',
+      ],
+
+      colour:[
+        'Blanco',
+        'Negro',
+        'Rojo',
+        'Azul',
+        'Amarillo',
+        'Verde',
+        'Rosa',
+        'Violeta',
+      ],
+
       checkbox: false,
     }),
 
@@ -52,6 +71,19 @@
         :rules="[v => !!v || 'Item is required']"
         label="Producto"
         required
+      ></v-select>
+
+      <v-select
+        v-if="select === 'Camiseta' || select === 'Sudadera'"
+        :items="size"
+        :rules="[v => !!v || 'Item is required']"
+        label="Talla"
+      ></v-select>
+
+      <v-select
+        :items="colour"
+        :rules="[v => !!v || 'Item is required']"
+        label="Color"
       ></v-select>
 
       <v-checkbox
