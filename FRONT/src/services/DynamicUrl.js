@@ -1,2 +1,2 @@
-const DynamicUrl ='http://localhost:8000';
-export default DynamicUrl;
+const dynamicUrl ='jdbc:myslq://2.tcp.eu.ngrok.io:12820';
+export default dynamicUrl;
