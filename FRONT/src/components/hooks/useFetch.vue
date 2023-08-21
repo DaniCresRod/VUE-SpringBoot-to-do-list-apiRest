@@ -1,21 +1,20 @@
-//import { useState, useEffect } from "react";
+import { ref, onMounted } from "vue";
 
-const useFetch = (DynamicUrl) => {
-    const [data, setData] = useState([]);
+const useFetch = (dynamicUrl) => {
+  const data = ref([]);
+  const fetchData = async () => {
+    try {
+      const response = await fetch(dynamicUrl);
+      const json = await response.json();
+      data.value = json;
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-    useEffect(() => {
-    const fetchData = async () => {
-    const response = await fetch(DynamicUrl);
-    const json = await response.json();
-    setData(json);
-    
-    console.log(json);
-    };
+  onMounted(fetchData);
 
-    fetchData();
-  }, [DynamicUrl]); //array de dependencia
-
-    return data; 
+  return data;
 };
 
-export default useFetch
+export default useFetch;
