@@ -10,13 +10,14 @@
   
 <script>
 import useFetch from "../components/hooks/useFetch";
-import DynamicUrl from "../components/services/DynamicUrl";
+import dynamicUrl from "../components/services/dynamicUrl";
 
 export default {
   setup() {
-    const { data, error, isLoading } = useFetch(DynamicUrl);
+    const { data, error, isLoading } = useFetch(dynamicUrlynamicUrl);
 
     return { data, error, isLoading };
   },
 };
 </script>
+
