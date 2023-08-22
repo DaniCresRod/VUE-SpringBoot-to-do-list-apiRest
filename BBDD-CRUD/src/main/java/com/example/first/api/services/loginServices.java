@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 public class loginServices {
 
     @Autowired
-    loginRepository myRepo;
+    private loginRepository myRepo;
 
     //https://www.logicbig.com/tutorials/spring-framework/spring-data/query-by-example.html
 
