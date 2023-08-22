@@ -12,9 +12,6 @@ import org.springframework.context.annotation.Primary;
 public class loginModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
     @Column(name="UserEmail", unique = true)
     private String userEmail;
 
