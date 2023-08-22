@@ -1,49 +1,27 @@
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 
-const useFetch = (dynamicUrl) => {
-  const data = ref([null]);
+const useFetch = async (dynamicUrl) => {
+  const data = ref(null);
   const error = ref(null);
   const isLoading = ref(true);
-  const fetchData = async () => {
-    try {
-      const response = await fetch(dynamicUrl);
-      const json = await response.json();
-      data.value = json;
-    } catch (error) {
-      console.error("Error fetching data:", error);
+
+  try {
+    const response = await fetch(dynamicUrl);
+    if (!response.ok) {
+      throw new Error("La red no funciona, pi pi pi");
     }
-  };
+    const json = await response.json();
+    data.value = json;
+  } catch (error) {
+    console.error("error trayendonos los datos:", error);
+    error.value = error;
+  } finally {
+    isLoading.value = false;
+  }
 
-  onMounted(fetchData);
-
-  return data;
+  return { data, error, isLoading };
 };
-// export default {
-//     setup() {
-//     const data = ref(null);
-    
-
-//     onMounted(() => {
-//         fetch(`${DynamicUrl}/goods`)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error("Network response was not ok");
-//             }
-//             return response.json();
-//         })
-//         .then(apiData => {
-//             data.value = apiData;
-//             isLoading.value = false;
-//         })
-//         .catch(err => {
-//             error.value = err;
-//             isLoading.value = false;
-//         });
-//     });
-
-//     return { data, error, isLoading };
-//     },
-// };
-
 
 export default useFetch;
+
+
