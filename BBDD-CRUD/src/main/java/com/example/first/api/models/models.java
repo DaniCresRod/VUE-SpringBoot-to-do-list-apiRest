@@ -26,7 +26,7 @@ public class models {
     @Value("Tu frase aqui")
     @Column(name="Message")
     private String prodMessage;
-    @Nullable
+    //@Nullable
     @Value("")
     @Column(name="Size")
     @Enumerated(EnumType.STRING)
