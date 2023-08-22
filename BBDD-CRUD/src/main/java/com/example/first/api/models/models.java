@@ -1,8 +1,9 @@
 package com.example.first.api.models;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Value;
 @Setter
 @Entity
 @Table(name="goods")
+@NoArgsConstructor
+@AllArgsConstructor
 public class models {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -23,7 +26,7 @@ public class models {
     @Value("Tu frase aqui")
     @Column(name="Message")
     private String prodMessage;
-    @Nullable
+    //@Nullable
     @Value("")
     @Column(name="Size")
     @Enumerated(EnumType.STRING)
@@ -32,17 +35,6 @@ public class models {
     @Column(name="Color")
     private String prodColor;
 
-    public models(){
-
-    }
-    public models(int id, String prodName, enumType prodType, String prodMessage, enumSize prodSize, String prodColor){
-        this.id=id;
-        this.prodName=prodName;
-        this.prodType=prodType;
-        this.prodMessage=prodMessage;
-        this.prodSize=prodSize;
-        this.prodColor=prodColor;
-    }
 
     enum enumType{
         SHIRT,
@@ -54,4 +46,6 @@ public class models {
     enum enumSize{
         S,M,L,XL
     }
+
+
 }

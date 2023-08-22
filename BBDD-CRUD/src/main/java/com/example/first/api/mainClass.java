@@ -3,6 +3,8 @@ package com.example.first.api;
 import org.aspectj.apache.bcel.classfile.ModuleMainClass;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 public class mainClass {

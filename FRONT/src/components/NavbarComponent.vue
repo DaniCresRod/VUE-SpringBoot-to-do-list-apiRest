@@ -1,22 +1,15 @@
-<script>
-export default {
-  data: () => ({
-    links: [
-      { name: 'Favourites', 
-        route: '/favourites' },
-    ],
-  }),
-};
+<script setup>
 
 import { ref, watch } from 'vue';
+
 
 const drawer = ref(false);
 const group = ref(null);
 
 const items = [
   {
-    title: 'Foo',
-    value: 'foo',
+    title: 'Home',
+    value: '/',
   },
   {
     title: 'Bar',
@@ -27,8 +20,8 @@ const items = [
     value: 'fizz',
   },
   {
-    title: 'Buzz',
-    value: 'buzz',
+    title: 'Login',
+    value: '/login',
   },
 ];
 
@@ -55,15 +48,11 @@ watch(group, () => {
         <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
       </v-app-bar>
 
-      <v-navigation-drawer
-        v-model="drawer"
-        location="top"
-        temporary
-      >
-        <v-list
-          :items="items"
-        ></v-list>
+      <v-navigation-drawer v-model="drawer" location="top" temporary>        
+        <v-list>
+          <router-link v-for="item in items" :key="items.title" :to="item.value">
+            {{item.title}}
+          </router-link>
+        </v-list>     
       </v-navigation-drawer>
-
-
 </template>
