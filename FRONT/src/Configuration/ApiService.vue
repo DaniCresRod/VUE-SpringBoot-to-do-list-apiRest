@@ -7,17 +7,17 @@
     </div>
     </div>
 </template>
-  
+
 <script>
 import useFetch from "../components/hooks/useFetch";
 import dynamicUrl from "../components/services/dynamicUrl";
 
 export default {
-  setup() {
+setup() {
     const { data, error, isLoading } = useFetch(dynamicUrlynamicUrl);
 
     return { data, error, isLoading };
-  },
+},
 };
 </script>
 
