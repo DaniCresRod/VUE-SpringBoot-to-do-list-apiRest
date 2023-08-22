@@ -14,7 +14,7 @@ import dynamicUrl from "../components/services/dynamicUrl";
 
 export default {
 setup() {
-    const { data, error, isLoading } = useFetch(dynamicUrlynamicUrl);
+    const { data, error, isLoading } = useFetch(dynamicUrl);
 
     return { data, error, isLoading };
 },
