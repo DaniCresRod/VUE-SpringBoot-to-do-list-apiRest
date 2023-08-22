@@ -2,6 +2,7 @@ package com.example.first.api.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.context.annotation.Primary;
 
 @Entity
 @Getter
@@ -11,7 +12,10 @@ import lombok.*;
 public class loginModel {
 
     @Id
-    @Column(name="UserEmail")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name="UserEmail", unique = true)
     private String userEmail;
 
     @Column(name = "UserName")
