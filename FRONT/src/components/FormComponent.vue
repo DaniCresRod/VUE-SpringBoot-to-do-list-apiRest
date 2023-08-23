@@ -23,10 +23,7 @@ const colour = [
 const checkbox = ref(false);
 const response = ref(null);
 
-const validate = async () => {
-  const { valid } = await $refs.form.validate();
-
-  if (valid) {
+const validate = async ({}) => {
     try {
       const result = await ProductData.create({
         name: name.value,
@@ -42,16 +39,8 @@ const validate = async () => {
     } catch (error) {
       console.log(error);
   }
-}
 };
 
-const reset = () => {
-  $refs.form.reset();
-};
-
-const resetValidation = () => {
-  $refs.form.resetValidation();
-};
 </script>
 
 <template>
@@ -96,32 +85,29 @@ const resetValidation = () => {
 
       <div class="d-flex flex-column">
         <v-btn
-          color="success"
           class="mt-4"
           block
           @click="validate"
         >
           Validar
         </v-btn>
-
-        <v-btn
-          color="error"
-          class="mt-4"
-          block
-          @click="reset"
-        >
-          Resetea Formulario
-        </v-btn>
-
-        <v-btn
-          color="warning"
-          class="mt-4"
-          block
-          @click="resetValidation"
-        >
-          Cancela envío
-        </v-btn>
       </div>
     </v-form>
   </v-sheet>
 </template>
+
+<style scoped>
+
+.mt-4 {
+  text-decoration: none;
+  transition: 0.3s;
+  background-color: rgba(54, 157, 178, 1);
+  color: white;
+}
+.mt-4:hover{
+  
+  letter-spacing: 0.15rem;
+  padding: 0 1rem;
+  font-weight: bolder;
+}
+</style>

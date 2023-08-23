@@ -1,6 +1,6 @@
 import http from '../httpCommon';
 
-export default ProductData({
+export default({
 
     create(ProductData){
         return http.post(`/product`, ProductData);

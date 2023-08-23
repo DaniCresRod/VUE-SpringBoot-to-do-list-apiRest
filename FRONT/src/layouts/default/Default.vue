@@ -1,6 +1,5 @@
 <script setup>
   import NavbarComponent from '@/components/NavbarComponent.vue';
-  import FormComponent from '@/components/FormComponent.vue';
   import FooterComponent from '@/components/FooterComponent.vue';
   import { RouterView } from 'vue-router';
 </script>
@@ -11,7 +10,6 @@
     <v-main>
       <router-view />
     </v-main>
-    <form-component/>
     <footer-component />
   </v-app>
 </template>
