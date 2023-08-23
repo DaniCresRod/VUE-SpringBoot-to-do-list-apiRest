@@ -1,20 +1,38 @@
 package com.example.first.api.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.beans.factory.annotation.Value;
 
 @Getter
 @Setter
 @Entity
+@Table(name="goods")
+@NoArgsConstructor
+@AllArgsConstructor
 public class models {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name="Id")
     private int id;
+    @Column(name="Name")
     private String prodName;
+    @Column(name="Type")
+    @Enumerated(EnumType.STRING)
     private enumType prodType ;
+    @Value("Tu frase aqui")
+    @Column(name="Message")
     private String prodMessage;
-    private enumSize prodSize;
+    //@Nullable
+    @Value("")
+    @Column(name="Size")
+    @Enumerated(EnumType.STRING)
+    private enumSize prodSize;      //Dani: Revisar si da problemas el null con la enumeracion
+    @Value("White")
+    @Column(name="Color")
     private String prodColor;
 
 
