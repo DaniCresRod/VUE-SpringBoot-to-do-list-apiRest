@@ -19,7 +19,6 @@ const items = [
     value: 'foo',
   },
   {
-    title: 'Bar',
     value: 'bar',
   },
   {
