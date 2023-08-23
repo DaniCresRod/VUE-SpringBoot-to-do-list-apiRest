@@ -2,8 +2,8 @@
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
 
-const name = ref("");
-const nameRules = [
+const message = ref("");
+const messageRules = [
   (v) => !!v || "Frase es obligatoria",
   (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
 ];
@@ -26,7 +26,7 @@ const response = ref(null);
 const validate = async ({}) => {
     try {
       const result = await ProductData.create({
-        name: name.value,
+        message: message.value,
         product: select.value,
         size:
           select.value === "Camiseta" || select.value === "Sudadera"
@@ -48,9 +48,9 @@ const validate = async ({}) => {
 
     <v-form ref="form">
       <v-text-field
-        v-model="name"
+        v-model="message"
         :counter="20"
-        :rules="nameRules"
+        :rules="messageRules"
         label="Escribe una frase!"
         required
       ></v-text-field>
