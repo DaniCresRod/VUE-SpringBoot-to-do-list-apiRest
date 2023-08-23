@@ -37,10 +37,10 @@ const routes = [
         component: () => import('@/components/LoginComponent.vue'),
       },
       {
-        path: '/card',
-        name: 'Card',
-        component: () => import('@/components/CardComponent.vue'),
-      }
+        path: '/form',
+        name: 'Form',
+        component: () => import('@/components/FormComponent.vue'),
+      },
     ],
   },
 ]

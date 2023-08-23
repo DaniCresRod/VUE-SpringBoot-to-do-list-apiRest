@@ -1,10 +1,9 @@
 import http from '../httpCommon';
 
-class ProductData{
+export default ProductData({
 
     create(ProductData){
         return http.post(`/product`, ProductData);
     }
-
-}
+})
 

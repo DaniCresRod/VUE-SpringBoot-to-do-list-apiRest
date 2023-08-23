@@ -2,7 +2,7 @@ import axios from "axios";
 
 export default axios.create({
 
-    baseURL:"jdbc:mysql://127.0.0.1/db_todo",
+    baseURL:"http://localhost:9090",
     headers: {
         "Content-type": "aplication/json"
     }
