@@ -1,5 +1,6 @@
 
 <script>
+
   export default {
     data: () => ({
       name: '',
@@ -48,6 +49,7 @@
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+
     },
   }
 </script>
