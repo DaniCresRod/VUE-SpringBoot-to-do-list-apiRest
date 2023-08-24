@@ -22,6 +22,10 @@ const items = [
     title: 'Contact Us',
     route: '/contact',
   },
+  {
+    title: 'Login',
+    route: '/login',
+  },
 ];
 
 watch(group, () => {

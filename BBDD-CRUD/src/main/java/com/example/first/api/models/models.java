@@ -18,8 +18,6 @@ public class models {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name="Id")
     private int id;
-    @Column(name="Name")
-    private String prodName;
     @Column(name="Type")
 //    @Enumerated(EnumType.STRING)
     private String prodType ;

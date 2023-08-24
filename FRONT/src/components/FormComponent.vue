@@ -34,11 +34,6 @@ const validateForm = async () => {
       prodColor: prodColor.value,
       terms: checkbox.value,
     });
-    console.log(result.data);
-    console.log(prodMessage.value);
-    console.log(prodType.value);
-    console.log(prodSize.value);
-    console.log(prodColor.value);
     response.value = result.data;
   } catch (error) {
     console.log(error);
