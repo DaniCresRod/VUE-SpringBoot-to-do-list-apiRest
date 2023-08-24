@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
 
-const message = ref("");
+const prodMessage = ref("");
 const messageRules = [
   (v) => !!v || "Frase es obligatoria",
   (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
@@ -26,19 +26,15 @@ const response = ref(null);
 const validate = async ({}) => {
     try {
       const result = await ProductData.create({
-        message: message.value,
-        product: select.value,
-        size:
-          select.value === "Camiseta" || select.value === "Sudadera"
-            ? size.value
-            : null,
-        color: colour.value,
-        terms: checkbox.value,
+        prodMessage: prodMessage.value,
       });
+      console.log(result.data);
+      console.log(prodMessage.value);
       response.value = result.data;
     } catch (error) {
       console.log(error);
   }
+
 };
 
 </script>
@@ -48,7 +44,7 @@ const validate = async ({}) => {
 
     <v-form ref="form">
       <v-text-field
-        v-model="message"
+        :v-model="message"
         :counter="20"
         :rules="messageRules"
         label="Escribe una frase!"
@@ -105,7 +101,7 @@ const validate = async ({}) => {
   color: white;
 }
 .mt-4:hover{
-  
+
   letter-spacing: 0.15rem;
   padding: 0 1rem;
   font-weight: bolder;
