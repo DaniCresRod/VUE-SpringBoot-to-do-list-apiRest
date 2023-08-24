@@ -44,7 +44,7 @@ const validate = async ({}) => {
 
     <v-form ref="form">
       <v-text-field
-        :v-model="message"
+        v-model="prodMessage"
         :counter="20"
         :rules="messageRules"
         label="Escribe una frase!"
