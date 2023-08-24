@@ -21,31 +21,31 @@ public class models {
     @Column(name="Name")
     private String prodName;
     @Column(name="Type")
-    @Enumerated(EnumType.STRING)
-    private enumType prodType ;
+//    @Enumerated(EnumType.STRING)
+    private String prodType ;
     @Value("Tu frase aqui")
     @Column(name="Message")
     private String prodMessage;
     //@Nullable
     @Value("")
     @Column(name="Size")
-    @Enumerated(EnumType.STRING)
-    private enumSize prodSize;      //Dani: Revisar si da problemas el null con la enumeracion
+//    @Enumerated(EnumType.STRING)
+    private String prodSize;      //Dani: Revisar si da problemas el null con la enumeracion
     @Value("White")
     @Column(name="Color")
     private String prodColor;
 
 
-    enum enumType{
-        SHIRT,
-        HOODIE,
-        MUG,
-        BOTTLE
-    }
-
-    enum enumSize{
-        S,M,L,XL
-    }
+//    enum enumType{
+//        Camiseta,
+//        Sudadera,
+//        Taza,
+//        Botella
+//    }
+//
+//    enum enumSize{
+//        S,M,L,XL
+//    }
 
 
 }
