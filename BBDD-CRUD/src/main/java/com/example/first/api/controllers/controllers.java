@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 @RestController
 @RequestMapping("/product")
-@CrossOrigin("*")
+@CrossOrigin(origins = "*")
 public class controllers {
 
     @Autowired
@@ -20,7 +20,7 @@ public class controllers {
         return myService.getProducts();
     }
 
-    @PostMapping(value="/add")
+    @PostMapping
     public models setProduct(@RequestBody models newProduct){
         return myService.setProduct(newProduct);
     }

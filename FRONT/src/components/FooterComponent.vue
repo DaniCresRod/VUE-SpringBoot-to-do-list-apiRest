@@ -31,7 +31,6 @@ export default {
     </v-row>
   </v-footer>
 </template>
-
 <style scoped>
 footer {
   max-height: 200px;
@@ -39,6 +38,13 @@ footer {
 .links {
   color: white;
   text-decoration: none;
+  transition: 0.3s;
+}
+.links:hover{
+  color: rgba(54, 157, 178, 1);
+  letter-spacing: 0.15rem;
+  padding: 0 1rem;
+  font-weight: bolder;
 }
 .footerText{
   color: rgba(54, 157, 178, 1);

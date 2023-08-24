@@ -9,15 +9,6 @@
 </template>
 
 <script>
-import useFetch from "../components/hooks/useFetch";
-import dynamicUrl from "../components/services/dynamicUrl";
-
-export default {
-setup() {
-    const { data, error, isLoading } = useFetch(dynamicUrl);
-
-    return { data, error, isLoading };
-},
-};
+    
 </script>
 

@@ -1,5 +1,5 @@
 <script>
-import CardItem from "@/components/CardComponent.vue"; // Ajusta la ruta correcta
+import CardItem from "@/components/TeamComponent.vue"; 
 
 export default {
   components: {
