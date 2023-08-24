@@ -44,7 +44,7 @@ watch(group, () => {
 
     <v-spacer></v-spacer>
 
-    <RouterLink to="/favourites"><v-btn variant="text" icon="mdi-heart"></v-btn></RouterLink>
+    <RouterLink to="/favorites"><v-btn variant="text" icon="mdi-heart"></v-btn></RouterLink>
 
     <v-btn variant="text" icon="mdi-filter"></v-btn>
 
