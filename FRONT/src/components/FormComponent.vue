@@ -2,15 +2,15 @@
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
 
-const message = ref("");
+const prodMessage = ref("");
 const messageRules = [
   (v) => !!v || "Frase es obligatoria",
-  (v) => (v && v.length <= 20) || "Name must be less than 20 characters",
+  (v) => (v && v.length <= 20) || "La frase debe tener menos de 20 caracteres",
 ];
-const select = ref(null);
+const prodType = ref(null);
 const items = ["Camiseta", "Sudadera", "Taza", "Botella"];
-const size = ["S", "M", "L", "XL"];
-const colour = [
+const prodSizeOptions = ["S", "M", "L", "XL"];
+const prodColorOptions = [
   "Blanco",
   "Negro",
   "Rojo",
@@ -20,35 +20,32 @@ const colour = [
   "Rosa",
   "Violeta",
 ];
+const prodSize = ref(null);
+const prodColor = ref(null);
 const checkbox = ref(false);
 const response = ref(null);
 
-const validate = async ({}) => {
-    try {
-      const result = await ProductData.create({
-        message: message.value,
-        product: select.value,
-        size:
-          select.value === "Camiseta" || select.value === "Sudadera"
-            ? size.value
-            : null,
-        color: colour.value,
-        terms: checkbox.value,
-      });
-      response.value = result.data;
-    } catch (error) {
-      console.log(error);
+const validateForm = async () => {
+  try {
+    const result = await ProductData.create({
+      prodMessage: prodMessage.value,
+      prodType: prodType.value,
+      prodSize: (prodType.value === "Camiseta" || prodType.value === "Sudadera") ? prodSize.value : null,
+      prodColor: prodColor.value,
+      terms: checkbox.value,
+    });
+    response.value = result.data;
+  } catch (error) {
+    console.log(error);
   }
 };
-
 </script>
 
 <template>
   <v-sheet width="300" class="mx-auto">
-
     <v-form ref="form">
       <v-text-field
-        :v-model="message"
+        v-model="message"
         :counter="20"
         :rules="messageRules"
         label="Escribe una frase!"
@@ -56,7 +53,7 @@ const validate = async ({}) => {
       ></v-text-field>
 
       <v-select
-        v-model="select"
+        v-model="prodType"
         :items="items"
         :rules="[v => !!v || 'El tipo de producto es necesario']"
         label="Producto"
@@ -64,14 +61,16 @@ const validate = async ({}) => {
       ></v-select>
 
       <v-select
-        v-if="select === 'Camiseta' || select === 'Sudadera'"
-        :items="size"
+        v-if="prodType === 'Camiseta' || prodType === 'Sudadera'"
+        v-model="prodSize"
+        :items="prodSizeOptions"
         :rules="[v => !!v || 'La talla es necesaria']"
         label="Talla"
       ></v-select>
 
       <v-select
-        :items="colour"
+        v-model="prodColor"
+        :items="prodColorOptions"
         :rules="[v => !!v || 'El color es obligatorio']"
         label="Color"
       ></v-select>
@@ -79,7 +78,7 @@ const validate = async ({}) => {
       <v-checkbox
         v-model="checkbox"
         :rules="[v => !!v || 'Acepta para continuar']"
-        label="Do you agree?"
+        label="¿Estás de acuerdo?"
         required
       ></v-checkbox>
 
@@ -87,7 +86,7 @@ const validate = async ({}) => {
         <v-btn
           class="mt-4"
           block
-          @click="validate"
+          @click="validateForm"
         >
           Validar
         </v-btn>
@@ -105,7 +104,7 @@ const validate = async ({}) => {
   color: white;
 }
 .mt-4:hover{
-  
+
   letter-spacing: 0.15rem;
   padding: 0 1rem;
   font-weight: bolder;

@@ -51,8 +51,6 @@ public class services {
     public models changeProduct(int id, models newProduct) {
         try{
             models toUpdateProduct= myRepo.findById(id).get();
-
-            toUpdateProduct.setProdName(newProduct.getProdName());
             toUpdateProduct.setProdType(newProduct.getProdType());
             toUpdateProduct.setProdMessage(newProduct.getProdMessage());
             toUpdateProduct.setProdSize(newProduct.getProdSize());
