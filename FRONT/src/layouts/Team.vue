@@ -1,5 +1,5 @@
 <script>
-import CardItem from "@/components/TeamComponent.vue"; 
+import CardItem from "@/components/TeamComponent.vue";
 
 export default {
   components: {
@@ -9,51 +9,57 @@ export default {
 </script>
 
 <template>
-  <div class="">
-    <div class="groupTeam">
+  <v-parallax
+    height="300"
+    width="auto"
+    src="../../public/img/image.png"
+  ></v-parallax>
+  <div class="teamGroup">
+    <!-- <div class="groupTeam"> -->
       <CardItem
-        imageSrc="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        imageSrc="../../public/img/image (1).png"
         title="Luci"
-        subtitle="1,000 miles of wonder"
-        buttonLabel="Explore"
-        content="I'm a thing. But, like most politicians, he promised more than he could deliver..."
+        subtitle="UX / UI Designer"
+        buttonLabel="Más de mi"
+        content='"Su figmita y sus cosas. Siempre se me ha dado bien romper Vuetify"'
       />
       <CardItem
-        imageSrc="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        imageSrc="../../public/img/image (2).png"
         title="Dani"
-        subtitle="1,000 miles of wonder"
-        buttonLabel="Explore"
-        content="I'm a thing. But, like most politicians, he promised more than he could deliver..."
+        subtitle="Product Owner"
+        buttonLabel="Más de mi"
+        content='"Algo que no has probado en Postman no tiene validez"'
       />
       <CardItem
-        imageSrc="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        imageSrc="../../public/img/image (3).png"
         title="Liber"
-        subtitle="1,000 miles of wonder"
-        buttonLabel="Explore"
-        content="I'm a thing. But, like most politicians, he promised more than he could deliver..."
+        subtitle="BackEnd Developer"
+        buttonLabel="Más de mi"
+        content='"Yo no comento, yo borro"'
       />
-    </div>
-    <div class="groupTeam">
+    <!-- </div>
+    <div class="groupTeam"> -->
       <CardItem
-        imageSrc="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        imageSrc="../../public/img/image (4).png"
         title="Javi"
-        subtitle="1,000 miles of wonder"
-        buttonLabel="Explore"
-        content="I'm a thing. But, like most politicians, he promised more than he could deliver..."
+        subtitle="Scrum Master"
+        buttonLabel="Más de mi"
+        content='"No necesito un ordenador para picar código"'
       />
       <CardItem
-        imageSrc="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+        imageSrc="../../public/img/image (5).png"
         title="Alberto"
-        subtitle="1,000 miles of wonder"
-        buttonLabel="Explore"
-        content="I'm a thing. But, like most politicians, he promised more than he could deliver..."
+        subtitle="FrontEnd Developer"
+        buttonLabel="Más de mi"
+        content='"Yo solo he participado en la creación de estas frases"'
       />
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
 <style>
-.groupTeam{
+
+.teamGroup{
   display: flex;
 }
 .cardTeam {
