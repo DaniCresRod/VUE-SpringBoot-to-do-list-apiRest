@@ -1,5 +1,9 @@
 <template>
+    <ProductCards/>
+    <br>
+    <br>
     <form-component />
+ 
 </template>
 
 <script setup>
