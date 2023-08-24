@@ -1,9 +1,40 @@
 <script setup>
-
-  import { ref } from 'vue'
-    
-  const visible=ref();  
+import { ref } from 'vue'
+import axios from 'axios'
   
+const visible=ref(); 
+const myEmail=ref();
+const myPass=ref();
+
+function Login(){
+
+  if(myEmail.value!=null){  
+    
+     
+  let data = JSON.stringify({
+    "userEmail": myEmail.value,
+    "userPassword": myPass.value
+  });
+
+  let config = {
+    method: 'get',
+    maxBodyLength: Infinity,
+    url: 'http://127.0.0.1:3007/login/logo',
+    //headers: {'Content-Type': 'application/json'},
+    body: data
+  };
+
+axios.request(config)
+  .then((response) => {
+    console.log(JSON.stringify(response.data));
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+  
+}
+
+}
 </script>
 
 <template>
@@ -18,6 +49,7 @@
         <div class="text-subtitle-1 text-medium-emphasis">Account</div>
   
         <v-text-field
+          v-model="myEmail"
           density="compact"
           placeholder="Email address"
           prepend-inner-icon="mdi-email-outline"
@@ -40,6 +72,7 @@
         </div>
   
         <v-text-field
+          v-model="myPass"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
@@ -57,7 +90,7 @@
           </v-card-text>
         </v-card>
   
-        <v-btn block class="mb-8" color="blue" size="large" variant="tonal">
+        <v-btn block class="mb-8" color="blue" size="large" variant="tonal" @click="Login()">
           Log In
         </v-btn>
   
