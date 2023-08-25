@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import ProductData from "@/services/ProductDataService";
 
 const prodMessage = ref("");
@@ -13,30 +13,37 @@ const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
   "Blanco",
   "Negro",
-  "Rojo",
-  "Azul",
-  "Amarillo",
-  "Verde",
-  "Rosa",
-  "Violeta",
 ];
 const prodSize = ref(null);
 const prodColor = ref(null);
 const checkbox = ref(false);
-const response = ref(null);
+
+
+//Función validación para activar/desactivar el botón de envío de formulario
+const isFormValid = computed(() => {
+  return (prodMessage.value.length > 0    //Message con un caracter al menos
+      && prodMessage.value.length <= 20   //No superior a 20 caracteres
+      && !!prodMessage.value              //'!!' se utiliza para convertir el valor en un booleano.
+      && !!prodType.value
+      && (!["Camiseta", "Sudadera"].includes(prodType.value) || !!prodSize.value)
+      && !!prodColor.value
+      && checkbox.value);
+});
 
 const validateForm = async () => {
-  try {
-    const result = await ProductData.create({
-      prodMessage: prodMessage.value,
-      prodType: prodType.value,
-      prodSize: (prodType.value === "Camiseta" || prodType.value === "Sudadera") ? prodSize.value : null,
-      prodColor: prodColor.value,
-      terms: checkbox.value,
-    });
-    response.value = result.data;
-  } catch (error) {
-    console.log(error);
+  if (isFormValid.value) {
+    try {
+      const result = await ProductData.create({
+        prodMessage: prodMessage.value,
+        prodType: prodType.value,
+        prodSize: prodType.value === "Camiseta" || prodType.value === "Sudadera" ? prodSize.value : null,
+        prodColor: prodColor.value,
+        terms: checkbox.value,
+      });
+      console.log(result.data);
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 </script>
@@ -85,12 +92,9 @@ Listas con <span></span>
       ></v-checkbox>
 
       <div class="d-flex flex-column">
-        <v-btn
-          class="mt-4"
-          block
-          @click="validateForm"
-        >
-          Validar
+        <!-- Botón con validación -->
+        <v-btn class="mt-4" block :disabled="!isFormValid" @click="validateForm">
+          Enviar Modelo
         </v-btn>
       </div>
     </v-form>
