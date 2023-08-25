@@ -2,7 +2,6 @@
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
 
-
 const cards =ref([]);
 
 const favoriteForm = async () => {
@@ -44,6 +43,7 @@ favoriteForm();
         <v-row dense>
           <v-col
             v-for="card in cards"
+            :key="card.id"
             :cols="card.flex"
           >
             <v-card>
@@ -54,17 +54,17 @@ favoriteForm();
                 height="200px"
                 cover
               >
-                <v-card-title class="text-white" v-text="card.prodMessage"></v-card-title>
+                 <v-card-title class="text-white" v-text="card.prodMessage"></v-card-title>
               </v-img>
   
               <v-card-actions>
                
-                <v-card-subtitle class="mt-4 text-subtitle-2" v-text="'Talla ' + card.prodSize"></v-card-subtitle>
+                <v-card-subtitle class="mt-4 text-subtitle-2" v-text="'Talla ' + (card.prodType === 'Camiseta' || card.prodType === 'Sudadera' ? card.prodSize : 'Única')"></v-card-subtitle>
                 <v-spacer></v-spacer>
   
-                <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart" @click="cancelfavorite(card.id)"></v-btn>
+                <v-btn size="medium" color="surface-variant" variant="text" @click="cancelfavorite(card.id)"><i class="fas fa-heart-broken"></i></v-btn>
 
-                <v-btn size="medium" color="surface-variant" variant="text" ><i class="fa fa-shopping-cart" aria-hidden="true"></i></v-btn>
+                <v-btn size="medium" color="surface-variant" variant="text"><i class="fa fa-shopping-cart" aria-hidden="true"></i></v-btn>
   
                 <v-btn size="small" color="surface-variant" variant="text" icon="mdi-share-variant"></v-btn>
               </v-card-actions>

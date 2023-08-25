@@ -13,6 +13,7 @@ const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
   "Blanco",
   "Negro",
+  "Azul",
 ];
 const prodSize = ref(null);
 const prodColor = ref(null);
