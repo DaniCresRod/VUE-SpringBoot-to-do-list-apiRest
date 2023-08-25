@@ -16,7 +16,7 @@ export default {
 </script>
 
 <template>
-  <v-card class="mx-auto cardTeam" max-width="344">
+  <v-card class="mx-auto cardTeam" max-width="344" >
     <v-img :src="imageSrc" height="200px" cover></v-img>
 
     <v-card-title>{{ title }}</v-card-title>
@@ -24,7 +24,7 @@ export default {
     <v-card-subtitle>{{ subtitle }}</v-card-subtitle>
 
     <v-card-actions>
-      <v-btn color="orange-lighten-2" variant="text">
+      <v-btn color="orange-lighten-2" variant="text" @click="show = !show">
         {{ buttonLabel }}
       </v-btn>
 
