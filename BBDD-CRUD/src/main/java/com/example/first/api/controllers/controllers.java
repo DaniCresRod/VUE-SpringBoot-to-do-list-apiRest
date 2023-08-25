@@ -16,9 +16,10 @@ public class controllers {
     services myService;
 
     @GetMapping()
-    public ArrayList<models> getProducts(){
-        return myService.getProducts();
+    public ArrayList<models> getProducts(@RequestParam(required = false) String type){
+        return myService.getProducts(type);
     }
+
 
     @PostMapping
     public models setProduct(@RequestBody models newProduct){
@@ -32,9 +33,6 @@ public class controllers {
 
     @PutMapping(path="/update/{id}")
     public models changeProduct(@RequestBody int id, @RequestBody models newProduct){
-
         return myService.setProduct(myService.changeProduct(id, newProduct));
     }
-
-
 }
