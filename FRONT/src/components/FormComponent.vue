@@ -13,12 +13,6 @@ const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
   "Blanco",
   "Negro",
-  "Rojo",
-  "Azul",
-  "Amarillo",
-  "Verde",
-  "Rosa",
-  "Violeta",
 ];
 const prodSize = ref(null);
 const prodColor = ref(null);
