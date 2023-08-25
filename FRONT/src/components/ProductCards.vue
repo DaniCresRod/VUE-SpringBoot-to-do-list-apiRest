@@ -15,16 +15,16 @@
       return {
         items: [
           {
-            src: 'src/assets/biscocho_azul.png',
+            src: 'src/assets/inestabilidad_blanca.png',
           },
           {
-            src: 'src/assets/biscocho_blanca.png',
+            src: 'src/assets/pull_blanca.png',
           },
           {
-            src: 'src/assets/biscocho_negra.png',
+            src: 'src/assets/span_azul.png',
           },
           {
-            src: 'src/assets/blanca_span.png',
+            src: 'src/assets/rama_negra.png',
           },
         ],
       };
