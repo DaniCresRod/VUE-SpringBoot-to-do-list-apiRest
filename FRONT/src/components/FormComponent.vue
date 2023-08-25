@@ -41,11 +41,13 @@ const validateForm = async () => {
 };
 </script>
 
+Listas con <span></span>
+
 <template>
   <v-sheet width="300" class="mx-auto">
     <v-form ref="form">
       <v-text-field
-        v-model="message"
+        v-model="prodMessage"
         :counter="20"
         :rules="messageRules"
         label="Escribe una frase!"
