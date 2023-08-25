@@ -33,56 +33,54 @@ watch(group, () => {
 });
 </script>
 
-<template>
-  <v-app-bar
-    color="primary"
-    prominent
-  >
-    <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-    <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
-
-    <v-spacer></v-spacer>
-
-    <RouterLink to="/favorites"><v-btn variant="text" icon="mdi-heart"></v-btn></RouterLink>
-
-    <v-btn variant="text" icon="mdi-filter"></v-btn>
-
-    <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-  </v-app-bar>
-
-  <v-navigation-drawer
-    v-model="drawer"
-    location="top"
-    temporary
-  >
-
-    <v-list>
-      <RouterLink
-        class="itemList"
-        v-for="item in items"
-        :key="item.title"
-        :to="item.route"
-      >
-        {{ item.title }}
-      </RouterLink>
-    </v-list>
-  </v-navigation-drawer>
-</template>
-
 <style>
-  .itemList {
-    text-decoration: none;
-    color: rgba(54, 157, 178, 1);
-  }
-  .itemList:hover {
-    letter-spacing: 0.15rem;
-    font-weight: bolder;
-  }
-  .v-list{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-left: 1rem;
-  }
+.itemList {
+  text-decoration: none;
+  color: rgba(54, 157, 178, 1);
+}
+.itemList:hover {
+  letter-spacing: 0.15rem;
+  font-weight: bolder;
+}
+.v-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 1rem;
+}
 </style>
+
+<template>
+  <div>
+    <v-app-bar color="primary" prominent>
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <RouterLink to="/favorites">
+        <v-btn variant="text" icon="mdi-heart"></v-btn>
+      </RouterLink>
+
+      <RouterLink to="/filter">
+        <v-btn variant="text" icon="mdi-filter"></v-btn>
+      </RouterLink>
+
+      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" location="top" temporary>
+      <v-list>
+        <RouterLink
+          class="itemList"
+          v-for="item in items"
+          :key="item.title"
+          :to="item.route"
+        >
+          {{ item.title }}
+        </RouterLink>
+      </v-list>
+    </v-navigation-drawer>
+  </div>
+</template>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 @Service
 public class services {
@@ -14,9 +15,14 @@ public class services {
     repositories myRepo;
 
 
-    public ArrayList<models> getProducts() {
-       return (ArrayList<models>) myRepo.findAll();
+    public ArrayList<models> getProducts(String type) {
+        if (type == null || type.isEmpty()) {
+            return new ArrayList<>((Collection) myRepo.findAll());
+        } else {
+            return new ArrayList<>(myRepo.findByProdType(type));
+        }
     }
+
 
     public models getOneProduct(int id){
         try{

@@ -41,6 +41,11 @@ const routes = [
         name: 'Form',
         component: () => import('@/components/FormComponent.vue'),
       },
+      {
+        path: '/filter',
+        name: 'Filter',
+        component: () => import('@/components/FilterComponent.vue'),
+      },
     ],
   },
 ]

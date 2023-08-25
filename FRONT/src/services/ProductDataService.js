@@ -6,10 +6,10 @@ export default({
         return http.post(`/product`, ProductData);
     },
 
-    getAll(ProductData) {
-        return http.get(`/product`, ProductData);
-    },
-    
+    getAll(params) {
+        return http.get(`/product`, { params });
+      },
+      
     getById(productId) {
         return http.get(`/product/${productId}`);
     },
