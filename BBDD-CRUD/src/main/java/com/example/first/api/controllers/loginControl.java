@@ -15,11 +15,16 @@ public class loginControl {
     @Autowired
     private loginServices myService;
 
-    @GetMapping(path="/logo")
+    @PostMapping(path="/logo")
     public loginModel getUser(@RequestBody loginModel loginData){
 
         Example<loginModel> myLogin=Example.of(loginData);
 
-        return myService.tryLogin(myLogin);
+        return myService.tryLogin(loginData);
+    }
+
+    @PostMapping(path="/add")
+    public loginModel addUser(@RequestBody loginModel newData){
+        return myService.addNewUser(newData);
     }
 }
