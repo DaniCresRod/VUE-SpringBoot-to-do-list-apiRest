@@ -13,12 +13,6 @@ const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
   "Blanco",
   "Negro",
-  "Rojo",
-  "Azul",
-  "Amarillo",
-  "Verde",
-  "Rosa",
-  "Violeta",
 ];
 const prodSize = ref(null);
 const prodColor = ref(null);
@@ -45,7 +39,7 @@ const validateForm = async () => {
   <v-sheet width="300" class="mx-auto">
     <v-form ref="form">
       <v-text-field
-        v-model="message"
+        v-model="prodMessage"
         :counter="20"
         :rules="messageRules"
         label="Escribe una frase!"

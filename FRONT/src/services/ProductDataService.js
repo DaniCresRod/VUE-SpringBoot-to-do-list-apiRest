@@ -15,7 +15,7 @@ export default({
     },
     
     update(productId, ProductData) {
-        return http.put(`/product/delete/${productId}`, ProductData);
+        return http.put(`/product/update/${productId}`, ProductData);
     },
     
     delete(productId) {
