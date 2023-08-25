@@ -18,7 +18,6 @@ async function Login(){
   Connection.create(data);
 
   try{
-    //const response=await axios.post('http://127.0.0.1:3007/login/logo', data);
     const response=await Connection.create(data);
     console.log(response.data);
   }  
