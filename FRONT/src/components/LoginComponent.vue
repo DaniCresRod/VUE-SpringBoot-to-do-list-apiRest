@@ -21,7 +21,7 @@ async function Login(){
 
   try{
     const response=await Connection.create(data);
-    
+    console.log(response.data);
     if(response.data!=""){
       console.log(response.data);
       userStore.uEmail=response.data.userEmail;
@@ -99,14 +99,16 @@ async function Login(){
         </v-btn>
   
         <v-card-text class="text-center">
-          <a
+          <!-- <a
             class="text-blue text-decoration-none"
             href="/loginSignUp"
             rel="noopener noreferrer"
             target="_self"
-          >
+          > -->
+          <router-link to="/loginSignUp">
             Darse de alta <v-icon icon="mdi-chevron-right"></v-icon>
-          </a>
+          </router-link>
+            <!-- </a> -->
         </v-card-text>
       </v-card>
     </div>

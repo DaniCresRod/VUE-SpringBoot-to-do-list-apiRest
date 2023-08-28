@@ -1,20 +1,44 @@
 <script setup>
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
+import {myUserStore} from '@/services/PiniaStore'
 
-const cards =ref([]);
+const cards = ref([]);
+const userStore = myUserStore();
+const favsArray= ref([]);
 
 const favoriteForm = async () => {
   try {
-    const response = await ProductData.getAll();
-      cards.value = response.data.map(product => ({
-      id: product.id,
-      prodMessage: product.prodMessage,
-      prodType: product.prodType,
-      prodSize: product.prodSize,
-      prodColor: product.prodColor,
-      src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
-      }));
+    // const response = await ProductData.getAll();
+    //   cards.value = response.data.map(product => ({
+    //   id: product.id,
+    //   prodMessage: product.prodMessage,
+    //   prodType: product.prodType,
+    //   prodSize: product.prodSize,
+    //   prodColor: product.prodColor,
+    //   src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
+    //   }));
+
+   //console.log(userStore.uFavs.length);
+    console.log(userStore.uFavs);
+    //Si hay favoritos, meterlos en un array como objetos JS
+      if(userStore.uFavs!==''){
+        (JSON.parse(userStore.uFavs)).forEach(element => {
+          favsArray.value.push(element);
+        });
+
+        console.log(favsArray.value);
+        cards.value = favsArray.value.map(product => ({
+        //id: product.id,
+        prodMessage: product.prodMessage,
+        prodType: product.prodType,
+        prodSize: product.prodSize,
+        prodColor: product.prodColor,
+        src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
+        }));
+      }  
+
+
   } 
   catch (error) {
     console.log(error);

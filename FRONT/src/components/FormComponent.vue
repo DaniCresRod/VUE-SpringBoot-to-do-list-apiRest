@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from "vue";
 import ProductData from "@/services/ProductDataService";
+import {myUserStore} from '@/services/PiniaStore'
+import router from "@/router";
+import Connection from '../services/LoginDataService'
 
 const prodMessage = ref("");
 const messageRules = [
@@ -18,6 +21,7 @@ const prodColorOptions = [
 const prodSize = ref("");
 const prodColor = ref("");
 const checkbox = ref(false);
+const favsArray= ref([]);
 
 // Función validación para activar/desactivar el botón de envío de formulario
 let isFormValid = computed(() => {
@@ -49,15 +53,68 @@ const validateForm = async () => {
         terms: checkbox.value,
       });
 
+      //Añadir en el PiniaStore el favorito
+      const userStore = myUserStore(); 
+      let thisArticle={prodMessage: prodMessage.value,
+        prodType: prodType.value,
+        prodSize:
+          prodType.value === "Camiseta" || prodType.value === "Sudadera"
+            ? prodSize.value
+            : null,
+        prodColor: prodColor.value,
+        terms: checkbox.value
+      }
+
+      console.log(userStore.uFavs);
+      //Si hay favoritos, meterlos en un array como objetos JS
+      if(userStore.uFavs!==''){
+        (JSON.parse(userStore.uFavs)).forEach(element => {
+          favsArray.value.push(element);
+        });
+      }
+
+      //Añadir el objeto actual
+      favsArray.value.push(thisArticle);
+      //Guardarlo todo en el userStore como string
+      userStore.uFavs=JSON.stringify(favsArray.value);
+      
+
+      if(userStore.uEmail!==''){
+
+        const data = {
+          userEmail: userStore.uEmail,
+          userPassword: userStore.uPass
+        };
+
+        try{
+          const response=await Connection.create(data);
+          
+          if(response.data!=""){
+            
+            router.push("/favorites");
+          }
+          else{
+            
+          }
+          
+        }  
+        catch(error){
+          console.log(error);
+        }       
+
+      } 
+
+
       // Mostrar el mensaje de confirmación al enviar el form
       showConfirmation.value = true;
       // Deasctivar el botón al enviar el form
       isFormValid = false;
 
-      // Actualizar la página después de 1.5 segundos
-      setTimeout(() => {
-        location.reload();
-       }, 1500);
+      //Actualizar la página después de 1.5 segundos
+      // setTimeout(() => {
+      //   location.close();
+      //   //router.push("/favorites");
+      //  }, 1500);
 
     } catch (error) {
       console.log(error);
