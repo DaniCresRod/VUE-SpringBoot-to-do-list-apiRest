@@ -1,5 +1,3 @@
-
-
 <template>
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
@@ -28,6 +26,26 @@
     data() {
       return {
         items: [
+          {
+            src: 'src/assets/biscocho_blanca.png',
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/figma_azul.png',
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/pildora_azul.png',
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/vue_negra.png',
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/ctrl_azul.png',
+            isFavorite: false,
+          },
           {
             src: 'src/assets/inestabilidad_blanca.png',
             isFavorite: false,
@@ -66,7 +84,7 @@
   transform: translate(-50%, -50%);
 }
 .border-image {
-  border-radius: 25px; 
+  border-radius: 25px;
 }
 .v-btn--variant-elevated{
       box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));

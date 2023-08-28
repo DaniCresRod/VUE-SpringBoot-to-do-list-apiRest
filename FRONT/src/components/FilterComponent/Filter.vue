@@ -107,6 +107,9 @@ onMounted(favoriteForm);
   </v-card>
 </template>
 
-<style scoped>
-
+<style>
+.v-slide-group__content{
+  display: flex;
+  justify-content: center;
+}
 </style>
