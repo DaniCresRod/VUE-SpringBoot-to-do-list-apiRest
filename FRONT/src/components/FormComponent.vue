@@ -52,6 +52,7 @@ const validateForm = async () => {
 Listas con <span></span>
 
 <template>
+  <h2>Diseña tu propia camiseta</h2>
   <v-sheet width="300" class="mx-auto">
     <v-form ref="form">
       <v-text-field
@@ -116,4 +117,6 @@ Listas con <span></span>
   padding: 0 1rem;
   font-weight: bolder;
 }
+h2{text-align: center;
+padding: 10px 0px 35px;}
 </style>
