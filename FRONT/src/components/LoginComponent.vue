@@ -15,8 +15,6 @@ async function Login(){
     userPassword: myPass.value
   };
 
-  Connection.create(data);
-
   try{
     const response=await Connection.create(data);
     console.log(response.data);
