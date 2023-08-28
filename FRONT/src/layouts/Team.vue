@@ -9,13 +9,13 @@ export default {
 </script>
 
 <template>
-  <v-parallax
+  <v-parallax class="imgInfo"
     height="300"
     width="auto"
     src="../../public/img/image.png"
   ></v-parallax>
   <div class="teamGroup">
-    <!-- <div class="groupTeam"> -->
+    <div class="teamItem">
       <CardItem
         imageSrc="../../public/img/image (1).png"
         title="Luci"
@@ -23,6 +23,8 @@ export default {
         buttonLabel="Más de mi"
         content='"Su figmita y sus cosas. Siempre se me ha dado bien romper Vuetify"'
       />
+      </div>
+      <div class="teamItem">
       <CardItem
         imageSrc="../../public/img/image (2).png"
         title="Dani"
@@ -30,6 +32,8 @@ export default {
         buttonLabel="Más de mi"
         content='"Algo que no has probado en Postman no tiene validez"'
       />
+    </div>
+    <div class="teamItem">
       <CardItem
         imageSrc="../../public/img/image (3).png"
         title="Liber"
@@ -37,8 +41,8 @@ export default {
         buttonLabel="Más de mi"
         content='"Yo no comento, yo borro"'
       />
-    <!-- </div>
-    <div class="groupTeam"> -->
+    </div>
+    <div class="teamItem">
       <CardItem
         imageSrc="../../public/img/image (4).png"
         title="Javi"
@@ -46,6 +50,8 @@ export default {
         buttonLabel="Más de mi"
         content='"No necesito un ordenador para picar código"'
       />
+    </div>
+    <div class="teamItem">
       <CardItem
         imageSrc="../../public/img/image (5).png"
         title="Alberto"
@@ -53,7 +59,7 @@ export default {
         buttonLabel="Más de mi"
         content='"Yo solo he participado en la creación de estas frases"'
       />
-    <!-- </div> -->
+    </div>
   </div>
 </template>
 
@@ -61,9 +67,16 @@ export default {
 
 .teamGroup{
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; 
 }
-.cardTeam {
-  margin-bottom: 10px;
-  width: 300px;
+
+.imgInfo {
+  border-radius: 0.5rem;
+  background-size: contain;
+}
+
+.teamItem {
+  flex: 0 0 calc(20% - 20px); 
 }
 </style>
