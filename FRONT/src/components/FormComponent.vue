@@ -71,7 +71,7 @@ const validateForm = async () => {
 Listas con <span></span>
 
 <template>
-  <h2>Diseña tu propia camiseta</h2>
+  <h2>Personaliza tu propio producto</h2>
   <v-sheet width="300" class="mx-auto">
     <v-form ref="form">
       <v-text-field

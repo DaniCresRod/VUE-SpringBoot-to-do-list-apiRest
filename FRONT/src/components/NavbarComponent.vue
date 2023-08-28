@@ -11,7 +11,7 @@
         <v-btn variant="text" icon="mdi-heart"></v-btn>
       </RouterLink>
 
-      <v-btn variant="text" icon="mdi-filter" @click.stop="overlay = !overlay"></v-btn>
+      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = !overlay"></v-btn>
 
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
     </v-app-bar>
@@ -29,9 +29,9 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-overlay v-model="overlay" color="transparent" opacity="1" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
-      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto;">
-        <FilterComponent></FilterComponent>
+    <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
+      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
+        <FormComponent />
       </div>
     </v-overlay>
   </div>
@@ -40,7 +40,7 @@
 <script setup>
 import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
-import FilterComponent from '@/components/FilterComponent.vue';
+import FormComponent from '@/components/FormComponent.vue';
 
 const drawer = ref(false);
 const group = ref(null);
@@ -89,7 +89,12 @@ watch(group, () => {
   gap: 1rem;
   margin-left: 1rem;
 }
+.my-overlay-content {
+  padding: 4rem;
+  border-radius: 0.3rem;
+}
 .my-overlay-content::-webkit-scrollbar {
   display: none;
 }
+
 </style>
