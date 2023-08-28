@@ -1,9 +1,50 @@
+<template>
+  <div>
+    <v-app-bar color="primary" prominent>
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+      <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <RouterLink to="/favorites">
+        <v-btn variant="text" icon="mdi-heart"></v-btn>
+      </RouterLink>
+
+      <v-btn variant="text" icon="mdi-filter" @click.stop="overlay = !overlay"></v-btn>
+
+      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" location="top" temporary>
+      <v-list>
+        <RouterLink
+          class="itemList"
+          v-for="item in items"
+          :key="item.title"
+          :to="item.route"
+        >
+          {{ item.title }}
+        </RouterLink>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-overlay v-model="overlay" color="transparent" opacity="1" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
+      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto;">
+        <FilterComponent></FilterComponent>
+      </div>
+    </v-overlay>
+  </div>
+</template>
+
 <script setup>
 import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
+import FilterComponent from '@/components/FilterComponent.vue';
 
 const drawer = ref(false);
 const group = ref(null);
+const overlay = ref(false);
 
 const items = [
   {
@@ -39,7 +80,7 @@ watch(group, () => {
   color: rgba(54, 157, 178, 1);
 }
 .itemList:hover {
-  letter-spacing: 0.15rem;
+  letter-spacing: 0.60rem;
   font-weight: bolder;
 }
 .v-list {
@@ -48,39 +89,7 @@ watch(group, () => {
   gap: 1rem;
   margin-left: 1rem;
 }
+.my-overlay-content::-webkit-scrollbar {
+  display: none;
+}
 </style>
-
-<template>
-  <div>
-    <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <RouterLink to="/favorites">
-        <v-btn variant="text" icon="mdi-heart"></v-btn>
-      </RouterLink>
-
-      <RouterLink to="/filter">
-        <v-btn variant="text" icon="mdi-filter"></v-btn>
-      </RouterLink>
-
-      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="drawer" location="top" temporary>
-      <v-list>
-        <RouterLink
-          class="itemList"
-          v-for="item in items"
-          :key="item.title"
-          :to="item.route"
-        >
-          {{ item.title }}
-        </RouterLink>
-      </v-list>
-    </v-navigation-drawer>
-  </div>
-</template>

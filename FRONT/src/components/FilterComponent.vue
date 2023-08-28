@@ -1,10 +1,10 @@
+
+
 <template>
   <div>
-    <label>Filtrar por tipo:</label>
-    <select v-model="selectedProdType" @change="favoriteForm">
-      <option value="">Todos</option>
-      <option v-for="prodType in prodTypes" :key="prodType" :value="prodType">{{ prodType }}</option>
-    </select>
+    <div class="filter-container">
+      <v-btn class="filter-button" v-for="prodType in prodTypes" :key="prodType" @click="selectedProdType = prodType; favoriteForm()">{{ prodType }}</v-btn>
+    </div>
     <v-card class="mx-auto" max-width="500">
       <v-container fluid>
         <v-row dense>
@@ -65,20 +65,21 @@ const cards = ref([]);
 const favoriteForm = async () => {
   try {
     const response = await ProductData.getAll({ type: selectedProdType.value });
-    cards.value = response.data.map((product) => ({
-      id: product.id,
-      prodMessage: product.prodMessage,
-      prodType: product.prodType,
-      prodSize: product.prodSize,
-      prodColor: product.prodColor,
-      src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
-      flex: 12,
-    }));
+    cards.value = response.data
+      .filter((product) => !selectedProdType.value || product.prodType === selectedProdType.value)
+      .map((product) => ({
+        id: product.id,
+        prodMessage: product.prodMessage,
+        prodType: product.prodType,
+        prodSize: product.prodSize,
+        prodColor: product.prodColor,
+        src: "https://cdn.vuetifyjs.com/images/cards/house.jpg",
+        flex: 12,
+      }));
   } catch (error) {
     console.log(error);
   }
 };
-
 const cancelfavorite = async (productId) => {
   try {
     await ProductData.delete(productId);
@@ -91,5 +92,19 @@ const cancelfavorite = async (productId) => {
 favoriteForm();
 </script>
 
-<style></style>
+<style>
+.filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.filter-container > * {
+  margin: 10px;
+}
+
+.filter-button {
+  background-color: rgba(54, 157, 178, 1);
+  color: white;
+}
+</style>
