@@ -104,7 +104,7 @@ favoriteForm();
 }
 
 .filter-button {
-  background-color: rgba(54, 157, 178, 1);
+  background-color: rgba(54, 157, 178, 1) !important;
   color: white;
 }
 </style>
