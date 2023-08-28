@@ -29,7 +29,8 @@ if(myEmail.value!=null){
    
         const data = {
             userEmail: myEmail.value,
-            userPassword: myPass.value
+            userPassword: myPass.value,
+            userName: userName.value
 
         };
 
