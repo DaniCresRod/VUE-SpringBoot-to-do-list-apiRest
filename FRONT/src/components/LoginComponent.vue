@@ -1,9 +1,32 @@
 <script setup>
-
-  import { ref } from 'vue'
-    
-  const visible=ref();  
+import { ref } from 'vue'
+import Connection from '../services/LoginDataService'
   
+const visible=ref(); 
+const myEmail=ref();
+const myPass=ref();
+
+async function Login(){
+
+  if(myEmail.value!=null){      
+     
+  const data = {
+    userEmail: myEmail.value,
+    userPassword: myPass.value
+  };
+
+  try{
+    const response=await Connection.create(data);
+    console.log(response.data);
+  }  
+  catch(error){
+    console.log(error);
+  }
+    
+  }
+
+
+}
 </script>
 
 <template>
@@ -18,6 +41,7 @@
         <div class="text-subtitle-1 text-medium-emphasis">Account</div>
   
         <v-text-field
+          v-model="myEmail"
           density="compact"
           placeholder="Email address"
           prepend-inner-icon="mdi-email-outline"
@@ -40,6 +64,7 @@
         </div>
   
         <v-text-field
+          v-model="myPass"
           :append-inner-icon="visible ? 'mdi-eye-off' : 'mdi-eye'"
           :type="visible ? 'text' : 'password'"
           density="compact"
@@ -57,7 +82,7 @@
           </v-card-text>
         </v-card>
   
-        <v-btn block class="mb-8" color="blue" size="large" variant="tonal">
+        <v-btn block class="mb-8" color="blue" size="large" variant="tonal" @click="Login()">
           Log In
         </v-btn>
   

@@ -33,7 +33,7 @@ export default {
 </template>
 <style scoped>
 footer {
-  max-height: 200px;
+  height: 200px !important;
 }
 .links {
   color: white;

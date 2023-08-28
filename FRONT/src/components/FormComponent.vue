@@ -13,12 +13,7 @@ const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
   "Blanco",
   "Negro",
-  "Rojo",
   "Azul",
-  "Amarillo",
-  "Verde",
-  "Rosa",
-  "Violeta",
 ];
 const prodSize = ref("");
 const prodColor = ref("");
@@ -72,6 +67,8 @@ const validateForm = async () => {
 };
 
 </script>
+
+Listas con <span></span>
 
 <template>
   <v-sheet width="300" class="mx-auto">
