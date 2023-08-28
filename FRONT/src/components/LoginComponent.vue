@@ -1,38 +1,32 @@
 <script setup>
 import { ref } from 'vue'
-import axios from 'axios'
+import Connection from '../services/LoginDataService'
   
 const visible=ref(); 
 const myEmail=ref();
 const myPass=ref();
 
-function Login(){
+async function Login(){
 
-  if(myEmail.value!=null){  
-    
+  if(myEmail.value!=null){      
      
-  let data = JSON.stringify({
-    "userEmail": myEmail.value,
-    "userPassword": myPass.value
-  });
-
-  let config = {
-    method: 'get',
-    maxBodyLength: Infinity,
-    url: 'http://127.0.0.1:3007/login/logo',
-    //headers: {'Content-Type': 'application/json'},
-    body: data
+  const data = {
+    userEmail: myEmail.value,
+    userPassword: myPass.value
   };
 
-axios.request(config)
-  .then((response) => {
-    console.log(JSON.stringify(response.data));
-  })
-  .catch((error) => {
+  Connection.create(data);
+
+  try{
+    const response=await Connection.create(data);
+    console.log(response.data);
+  }  
+  catch(error){
     console.log(error);
-  });
-  
-}
+  }
+    
+  }
+
 
 }
 </script>
