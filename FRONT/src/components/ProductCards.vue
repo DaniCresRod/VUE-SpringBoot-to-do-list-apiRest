@@ -59,7 +59,11 @@ const items= ref([
           },
         ]);
 
-  const toggleFavorite = async (item) => {
+const isFavorite = (item) => {
+  return item.isFavorite;
+};
+
+const toggleFavorite = async (item) => {
   if (!item.isFavorite) {
     item.isFavorite = true;
   
@@ -70,12 +74,13 @@ const items= ref([
         prodType: "Camiseta",
         prodColor: item.color
       });
-      console.log('Added to favorites:', response.data);
+      console.log('Añadido a favoritos:', response.data);
     } catch (error) {
-      console.log('Error adding to favorites:', error);
+      console.log('Error', error);
     }
+  
   } else {
-    item.isFavorite = false;
+      item.isFavorite = false;
 
     try {
       const response = await ProductData.getAll();
@@ -101,10 +106,6 @@ const items= ref([
   }
 };
 
-const isFavorite = (item) => {
-  return item.isFavorite;
-};
- 
 const favoriteProduct = async () => {
   try {
     const response = await ProductData.getAll();
@@ -151,9 +152,7 @@ onBeforeMount(() => {
   </v-carousel>
 </template>
 
-
-
-<style>
+<style scoped>
 .favorite-button {
   position: absolute;
   top: 90%;
@@ -162,8 +161,6 @@ onBeforeMount(() => {
 }
 .border-image {
   border-radius: 25px;
-}
-.v-btn--variant-elevated{
-      box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+  box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
 }
 </style>
