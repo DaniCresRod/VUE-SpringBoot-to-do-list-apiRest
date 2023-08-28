@@ -14,13 +14,31 @@ public class loginServices {
 
     //https://www.logicbig.com/tutorials/spring-framework/spring-data/query-by-example.html
 
-    public loginModel tryLogin(Example<loginModel> myLogin) {
+    public loginModel tryLogin(loginModel myLogin) {
 
-        if(myRepo.findOne(myLogin).isPresent()){
-            return myRepo.findOne(myLogin).get();
+        loginModel userOK=myRepo.findByUserEmailAndUserPassword(myLogin.getUserEmail(), myLogin.getUserPassword());
+
+        if(userOK!=null){
+            return userOK;
         }
-        else {
+        else return null;
+
+//        if(myRepo.findOne(myLogin).isPresent()){
+//            return myRepo.findOne(myLogin).get();
+//        }
+//        else {
+//            return null;
+//        }
+    }
+
+    public loginModel addNewUser(loginModel newData) {
+        try{
+            return myRepo.save(newData);
+        }
+        catch(Exception e){
+            e.printStackTrace();
             return null;
         }
+
     }
 }
