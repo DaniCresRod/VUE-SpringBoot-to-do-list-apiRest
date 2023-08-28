@@ -72,6 +72,7 @@ const items = [
 watch(group, () => {
   drawer.value = false;
 });
+
 </script>
 
 <style>
