@@ -12,8 +12,6 @@ public class loginServices {
     @Autowired
     private loginRepository myRepo;
 
-    //https://www.logicbig.com/tutorials/spring-framework/spring-data/query-by-example.html
-
     public loginModel tryLogin(loginModel myLogin) {
 
         loginModel userOK=myRepo.findByUserEmailAndUserPassword(myLogin.getUserEmail(), myLogin.getUserPassword());
@@ -33,7 +31,10 @@ public class loginServices {
 
     public loginModel addNewUser(loginModel newData) {
         try{
-            return myRepo.save(newData);
+            if(myRepo.findByUserEmail(newData.getUserEmail())==null){
+                return myRepo.save(newData);
+            }
+            else return null;
         }
         catch(Exception e){
             e.printStackTrace();
