@@ -18,7 +18,7 @@ public class loginControl {
     @PostMapping(path="/logo")
     public loginModel getUser(@RequestBody loginModel loginData){
 
-        Example<loginModel> myLogin=Example.of(loginData);
+        //Example<loginModel> myLogin=Example.of(loginData);
 
         return myService.tryLogin(loginData);
     }
