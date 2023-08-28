@@ -1,10 +1,14 @@
 <script setup>
 import { ref } from 'vue'
 import Connection from '../services/LoginDataService'
+import router from '@/router';
+import {myUserStore} from '@/services/PiniaStore'
   
 const visible=ref(); 
 const myEmail=ref();
 const myPass=ref();
+
+const userStore = myUserStore(); 
 
 async function Login(){
 
@@ -17,11 +21,26 @@ async function Login(){
 
   try{
     const response=await Connection.create(data);
-    console.log(response.data);
+    
+    if(response.data!=""){
+      console.log(response.data);
+      userStore.uEmail=response.data.userEmail;
+      userStore.uName=response.data.userName;
+      userStore.uPass=response.data.userPassword;
+      userStore.uFavs=response.data.userFavs;
+      router.push("/favorites");
+    }
+    else{
+      
+    }
+
+    //console.log(userStore.uEmail);
+    
   }  
   catch(error){
     console.log(error);
   }
+
     
   }
 

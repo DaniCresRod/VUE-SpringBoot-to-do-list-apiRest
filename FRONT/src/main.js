@@ -6,6 +6,7 @@
 
 // Components
 import App from './App.vue'
+import { createPinia } from 'pinia';
 
 //Estilos globales
 import './assets/styles/global.css'; // Importa el archivo de estilos globales
@@ -19,6 +20,10 @@ import { registerPlugins } from '@/plugins'
 
 const app = createApp(App)
 
+// Crea una instancia de Pinia
+const pinia = createPinia();
+
 registerPlugins(app)
 
+app.use(pinia);
 app.mount('#app')
