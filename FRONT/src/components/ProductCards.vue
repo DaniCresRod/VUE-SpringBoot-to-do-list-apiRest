@@ -1,3 +1,133 @@
+<script setup>
+import { ref, onBeforeMount } from 'vue';
+import ProductData from "@/services/ProductDataService";
+
+const items= ref([
+          {
+            src: 'src/assets/biscocho_blanca.png',
+            color: "Blanco",
+            name: "BISCOCHO",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/figma_azul.png',
+            name: "Mi figmita y mis cosas",
+            color: "Azul",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/pildora_azul.png',
+            name: "Vine buscando PILDORA y encontre una MASTERCLASS",
+            color: "Azul",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/vue_negra.png',
+            isFavorite: false,
+            name: "Puxa Vue.js, Puxa Asturies",
+            color: "Negro",
+          },
+          {
+            src: 'src/assets/ctrl_azul.png',
+            name: "CTRL + Kete Comentes",
+            color: "Azul",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/inestabilidad_blanca.png',
+            name: "Somos los trabajadores de la inestabilidad mental",
+            color: "Blanco",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/pull_blanca.png',
+            name: "PULL antes de PUSH",
+            color: "Blanco",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/span_azul.png',
+            name: "Puxa Vue.js, Puxa Asturies",
+            color: "Azul",
+            isFavorite: false,
+          },
+          {
+            src: 'src/assets/rama_negra.png',
+            name: "Trabaja en tu putita rama",
+            color: "Negro",
+            isFavorite: false,
+          },
+        ]);
+
+  const toggleFavorite = async (item) => {
+  if (!item.isFavorite) {
+    item.isFavorite = true;
+  
+    try {
+      const response = await ProductData.create({
+        prodMessage: item.name,
+        prodSize: " ",
+        prodType: "Camiseta",
+        prodColor: item.color
+      });
+      console.log('Added to favorites:', response.data);
+    } catch (error) {
+      console.log('Error adding to favorites:', error);
+    }
+  } else {
+    item.isFavorite = false;
+
+    try {
+      const response = await ProductData.getAll();
+      const dataFromServer = response.data;
+      
+      const matchingItem = dataFromServer.find((serverItem) =>
+          serverItem.prodMessage === item.name &&
+          serverItem.prodColor === item.color &&
+          serverItem.prodType === "Camiseta"
+      );
+
+        if (matchingItem) {
+          try {
+            await ProductData.delete(matchingItem.id);
+            console.log("Eliminado de favoritos");
+          } catch (error) {
+            console.log("No se ha podido eliminar de favoritos", error);
+          }
+        }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+};
+
+const isFavorite = (item) => {
+  return item.isFavorite;
+};
+ 
+const favoriteProduct = async () => {
+  try {
+    const response = await ProductData.getAll();
+    const dataFromServer = response.data;
+    console.log(dataFromServer);
+    
+    dataFromServer.forEach(serverItem => {
+      const matchingItem = items.value.find
+      (item => item.name === serverItem.prodMessage && item.color === serverItem.prodColor && serverItem.prodType === "Camiseta");
+      if (matchingItem) {
+        matchingItem.isFavorite = true;
+      }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
+onBeforeMount(() => {
+  favoriteProduct();
+});
+
+</script>
+
 <template>
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
@@ -21,60 +151,7 @@
   </v-carousel>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        items: [
-          {
-            src: 'src/assets/biscocho_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/figma_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/pildora_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/vue_negra.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/ctrl_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/inestabilidad_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/pull_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/span_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/rama_negra.png',
-            isFavorite: false,
-          },
-        ],
-      };
-    },
-    methods: {
-      toggleFavorite(item) {
-        item.isFavorite = !item.isFavorite;
-      },
-      isFavorite(item) {
-        return item.isFavorite;
-      },
-    },
-  };
-</script>
+
 
 <style>
 .favorite-button {
