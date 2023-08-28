@@ -1,12 +1,12 @@
+<script setup>
+  import ProductCards from '@/components/ProductCards.vue';
+  import Filter from '@/components/FilterComponent/Filter.vue';
+</script>
+
+
 <template>
     <ProductCards/>
     <br>
     <br>
-    <form-component />
- 
+    <Filter/>
 </template>
-
-<script setup>
-  import ProductCards from '@/components/ProductCards.vue';
-  import FormComponent from '@/components/FormComponent.vue';
-</script>
