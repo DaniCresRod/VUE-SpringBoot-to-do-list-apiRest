@@ -7,7 +7,7 @@ const messageRules = [
   (v) => !!v || "Frase es obligatoria",
   (v) => (v && v.length <= 20) || "La frase debe tener menos de 20 caracteres",
 ];
-const prodType = ref(null);
+const prodType = ref("");
 const items = ["Camiseta", "Sudadera", "Taza", "Botella"];
 const prodSizeOptions = ["S", "M", "L", "XL"];
 const prodColorOptions = [
@@ -15,21 +15,25 @@ const prodColorOptions = [
   "Negro",
   "Azul",
 ];
-const prodSize = ref(null);
-const prodColor = ref(null);
+const prodSize = ref("");
+const prodColor = ref("");
 const checkbox = ref(false);
 
-
-//Función validación para activar/desactivar el botón de envío de formulario
-const isFormValid = computed(() => {
-  return (prodMessage.value.length > 0    //Message con un caracter al menos
-      && prodMessage.value.length <= 20   //No superior a 20 caracteres
-      && !!prodMessage.value              //'!!' se utiliza para convertir el valor en un booleano.
-      && !!prodType.value
-      && (!["Camiseta", "Sudadera"].includes(prodType.value) || !!prodSize.value)
-      && !!prodColor.value
-      && checkbox.value);
+// Función validación para activar/desactivar el botón de envío de formulario
+let isFormValid = computed(() => {
+  return (
+    prodMessage.value.length > 0 &&
+    prodMessage.value.length <= 20 &&
+    !!prodMessage.value &&
+    !!prodType.value &&
+    (!["Camiseta", "Sudadera"].includes(prodType.value) || !!prodSize.value) &&
+    !!prodColor.value &&
+    checkbox.value
+  );
 });
+
+const form = ref("");
+const showConfirmation = ref(false); // Variable para controlar la visibilidad del mensaje de confirmación
 
 const validateForm = async () => {
   if (isFormValid.value) {
@@ -37,16 +41,31 @@ const validateForm = async () => {
       const result = await ProductData.create({
         prodMessage: prodMessage.value,
         prodType: prodType.value,
-        prodSize: prodType.value === "Camiseta" || prodType.value === "Sudadera" ? prodSize.value : null,
+        prodSize:
+          prodType.value === "Camiseta" || prodType.value === "Sudadera"
+            ? prodSize.value
+            : null,
         prodColor: prodColor.value,
         terms: checkbox.value,
       });
-      console.log(result.data);
+
+      // Mostrar el mensaje de confirmación al enviar el form
+      showConfirmation.value = true;
+      // Deasctivar el botón al enviar el form
+      isFormValid = false;
+
+      // Actualizar la página después de 1.5 segundos
+      setTimeout(() => {
+        location.reload();
+       }, 1500);
+
     } catch (error) {
       console.log(error);
     }
   }
+
 };
+
 </script>
 
 Listas con <span></span>
@@ -94,9 +113,14 @@ Listas con <span></span>
 
       <div class="d-flex flex-column">
         <!-- Botón con validación -->
-        <v-btn class="mt-4" block :disabled="!isFormValid" @click="validateForm">
+        <v-btn ref="formBtn" class="mt-4" block :disabled="!isFormValid" @click="validateForm">
           Enviar Modelo
         </v-btn>
+      </div>
+
+      <!-- Mensaje de confirmación -->
+      <div v-if="showConfirmation" class="confirMessage">
+        ¡El formulario se ha enviado correctamente!
       </div>
     </v-form>
   </v-sheet>
@@ -115,5 +139,9 @@ Listas con <span></span>
   letter-spacing: 0.15rem;
   padding: 0 1rem;
   font-weight: bolder;
+}
+.confirMessage {
+  color: green;
+  margin-top: 10px;
 }
 </style>
