@@ -25,7 +25,7 @@ const prodColor = ref("");
 const checkbox = ref(false);
 
 // Función validación para activar/desactivar el botón de envío de formulario
-const isFormValid = computed(() => {
+let isFormValid = computed(() => {
   return (
     prodMessage.value.length > 0 &&
     prodMessage.value.length <= 20 &&
@@ -53,22 +53,16 @@ const validateForm = async () => {
         prodColor: prodColor.value,
         terms: checkbox.value,
       });
-      console.log(result.data);
 
-      // Mostrar el mensaje de confirmación y deshabilitar el botón
+      // Mostrar el mensaje de confirmación al enviar el form
       showConfirmation.value = true;
+      // Deasctivar el botón al enviar el form
+      isFormValid = false;
 
-
-      // Actualizar la página después de 2 segundos (ajusta el tiempo según tus necesidades)
+      // Actualizar la página después de 1.5 segundos
       setTimeout(() => {
-        prodMessage.value = "";
-        prodType.value = null;
-        prodSize.value = null;
-        prodColor.value = "";
-        checkbox.value = false;
-      }, 1000);
-
-      form.value.reset();
+        location.reload();
+       }, 1500);
 
     } catch (error) {
       console.log(error);
@@ -78,7 +72,6 @@ const validateForm = async () => {
 };
 
 </script>
-
 
 <template>
   <v-sheet width="300" class="mx-auto">
@@ -129,7 +122,7 @@ const validateForm = async () => {
       </div>
 
       <!-- Mensaje de confirmación -->
-      <div v-if="showConfirmation" class="confirmation-message">
+      <div v-if="showConfirmation" class="confirMessage">
         ¡El formulario se ha enviado correctamente!
       </div>
     </v-form>
@@ -150,7 +143,7 @@ const validateForm = async () => {
   padding: 0 1rem;
   font-weight: bolder;
 }
-.confirmation-message {
+.confirMessage {
   color: green;
   margin-top: 10px;
 }
