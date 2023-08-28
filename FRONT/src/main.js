@@ -7,6 +7,10 @@
 // Components
 import App from './App.vue'
 
+//Estilos globales
+import './assets/styles/global.css'; // Importa el archivo de estilos globales
+
+
 // Composables
 import { createApp } from 'vue'
 
