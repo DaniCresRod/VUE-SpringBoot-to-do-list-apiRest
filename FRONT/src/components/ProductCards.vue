@@ -155,60 +155,6 @@ onBeforeMount(() => {
 </div>
 </template>
 
-<script>
-  export default {
-    data() {
-      return {
-        items: [
-          {
-            src: 'src/assets/biscocho_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/figma_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/pildora_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/vue_negra.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/ctrl_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/inestabilidad_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/pull_blanca.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/span_azul.png',
-            isFavorite: false,
-          },
-          {
-            src: 'src/assets/rama_negra.png',
-            isFavorite: false,
-          },
-        ],
-      };
-    },
-    methods: {
-      toggleFavorite(item) {
-        item.isFavorite = !item.isFavorite;
-      },
-      isFavorite(item) {
-        return item.isFavorite;
-      },
-    },
-  };
-</script>
 
 <style>
 .carousel-container {
