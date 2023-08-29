@@ -211,6 +211,14 @@ onBeforeMount(() => {
 </script>
 
 <style>
+.carousel-container {
+  background-image: url('/tshirt_back.jpg'); 
+  background-size: cover; 
+  background-position: center;
+  filter: grayscale(50%);
+  opacity: 70%;
+  backdrop-filter: blur(50px);
+  } 
 .favorite-button {
   position: absolute;
   top: 90%;
