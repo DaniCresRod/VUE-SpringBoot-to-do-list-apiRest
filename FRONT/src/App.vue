@@ -1,7 +1,6 @@
 <script setup>
   import NavbarComponent from '@/components/NavbarComponent.vue';
   import FooterComponent from '@/components/FooterComponent.vue';
-  import Home from '@/views/Home.vue';
   import { RouterView } from 'vue-router';
 </script>
 
@@ -9,7 +8,6 @@
   <v-app>
     <navbar-component />
     <v-main>
-      <Home />
       <router-view />
     </v-main>
     <footer-component />

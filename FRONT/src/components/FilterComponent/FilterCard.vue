@@ -1,17 +1,12 @@
-<script>
-export default {
-  props: {
+<script setup>
+
+
     card: Object
-  },
-  methods: {
-    // Aquí puedes agregar tus métodos como cancelfavorite
-    cancelfavorite(productId) {
-      // Realiza la lógica necesaria utilizando productId y card
-      // Por ejemplo, puedes emitir un evento personalizado
+  
+    const cancelfavorite = (productId)=> {
       this.$emit("cancel-favorite", productId);
     }
-  }
-}
+  
 </script>
 
 <template>

@@ -58,6 +58,8 @@ const cancelfavorite = async (productId) => {
 };
 
 onMounted(favoriteForm);
+
+
 </script>
 
 <template>
