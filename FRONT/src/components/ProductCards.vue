@@ -2,6 +2,7 @@
 import { ref, onBeforeMount } from 'vue';
 import ProductData from "@/services/ProductDataService";
 
+
 const items= ref([
           {
             src: 'src/assets/biscocho_blanca.png',
