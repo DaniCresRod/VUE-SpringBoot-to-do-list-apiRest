@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import Connection from '../services/LoginDataService'
 import router from "@/router"
+import {myUserStore} from '@/services/PiniaStore'
 
+const userStore = myUserStore();
 
 const agreement = ref(false);
 const dialog = ref(false);
@@ -39,17 +41,20 @@ async function SignUp() {
     const data = {
       userEmail: myEmail.value,
       userPassword: myPass.value,
-      userName: userName.value
-
+      userName: userName.value,
+      userFavs: userStore.uFavs 
     };
 
     try {
       const response = await Connection.signUp(data);
       console.log(response.data);
-      if (response.data == "") {
-        location.reload();
+      if (response.data === "") {
+        router.push("/loginSignUp");
       }
       else {
+        userStore.uName=response.data.userName;
+        userStore.uEmail=response.data.userEmail;
+        userStore.uPass=response.data.userPassword;
         router.push("/favorites");        
       }
     }
