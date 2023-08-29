@@ -1,4 +1,5 @@
 <template>
+   <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
       v-for="(item, i) in items"
@@ -19,6 +20,7 @@
       </v-btn>
     </v-carousel-item>
   </v-carousel>
+</div>
 </template>
 
 <script>
@@ -77,6 +79,17 @@
 </script>
 
 <style>
+.carousel-container {
+  background-image: url('/tshirt_back.jpg'); 
+  background-size: cover; 
+  background-position: center;
+  filter: grayscale(50%);
+  opacity: 70%;
+  backdrop-filter: blur(50px);
+
+  } 
+
+
 .favorite-button {
   position: absolute;
   top: 90%;

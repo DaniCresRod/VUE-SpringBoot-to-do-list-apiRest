@@ -30,9 +30,9 @@
       </v-list>
     </v-navigation-drawer>
 
-    <div class="image-container">
+    <!-- <div class="image-container">
       <img class="grayscale" src="/public/tshirt_back.jpg" alt="fabrica de camisetas" />
-    </div>
+    </div> -->
 
     <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
       <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
@@ -100,25 +100,7 @@ const handleScroll = () => {
 </script>
 
 <style scoped>
-.image-container {
-    display: inline-block;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s;
-    cursor: none;
-  }
-  
-  .grayscale {
-    width: 100%;
-    height: auto;
-    filter: grayscale(100%);
-    transition: filter 0.3s, transform 0.3s;
-  }
-  
-  .image-container:hover .grayscale {
-    filter: none;
-    transform: scale(1.2);
-  }
+
 .bg-image {
   height: 75vh;
   background-image: url('\tshirts.jpg');
