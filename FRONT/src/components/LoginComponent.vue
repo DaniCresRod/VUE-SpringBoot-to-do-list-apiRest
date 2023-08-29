@@ -8,6 +8,8 @@ const visible=ref();
 const myEmail=ref();
 const myPass=ref();
 
+const favsArray=ref([])
+
 const userStore = myUserStore(); 
 
 async function Login(){
@@ -21,20 +23,38 @@ async function Login(){
 
   try{
     const response=await Connection.create(data);
-    console.log(response.data);
-    if(response.data!=""){
-      console.log(response.data);
-      userStore.uEmail=response.data.userEmail;
-      userStore.uName=response.data.userName;
-      userStore.uPass=response.data.userPassword;
-      userStore.uFavs=response.data.userFavs;
+    
+    if (response.data != "") {
+
+      userStore.uEmail = response.data.userEmail;
+      userStore.uName = response.data.userName;
+      userStore.uPass = response.data.userPassword;
+
+      //Pasa al array los favoritos que pudiera haber en la base de datos
+      (JSON.parse(response.data.userFavs)).forEach(element => {
+        favsArray.value.push(element);
+      });
+
+      //Pasa al array los favoritos que haya en pinia
+      (JSON.parse(userStore.uFavs)).forEach(element => {
+        favsArray.value.push(element);
+
+      });
+
+      //Mete en pinia todos los favoritos para poder visualizarlos
+      userStore.uFavs = JSON.stringify(favsArray.value);
+
+      //Resubir nuevos favoritos a la base de datos      
+
       router.push("/favorites");
     }
     else{
+
+      //Aqui va un mensaje de que ese usuario NO existe en la base de datos
       
     }
 
-    //console.log(userStore.uEmail);
+    
     
   }  
   catch(error){
