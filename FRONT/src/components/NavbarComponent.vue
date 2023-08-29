@@ -97,7 +97,7 @@ const handleScroll = () => {
 
 <style scoped>
 .bg-image {
-  height: 100vh;
+  height: 75vh;
   background-image: url('\tshirts.jpg');
   background-size: cover;
   background-position: center;
