@@ -1,12 +1,14 @@
-<script setup>
-
-
+<script>
+export default {
+  props: {
     card: Object
-  
-    const cancelfavorite = (productId)=> {
+  },
+  methods: {
+    cancelfavorite(productId) {
       this.$emit("cancel-favorite", productId);
     }
-  
+  }
+}
 </script>
 
 <template>

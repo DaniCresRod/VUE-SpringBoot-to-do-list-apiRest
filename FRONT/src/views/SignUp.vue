@@ -50,7 +50,7 @@ async function SignUp() {
         location.reload();
       }
       else {
-        router.push("/favorites");        
+        router.push("/favs");        
       }
     }
     catch (error) {

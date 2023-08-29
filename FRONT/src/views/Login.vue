@@ -101,7 +101,7 @@ async function Login(){
         <v-card-text class="text-center">
           <a
             class="text-blue text-decoration-none"
-            href="/loginSignUp"
+            href="/SignUp"
             rel="noopener noreferrer"
             target="_self"
           >
