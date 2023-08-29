@@ -49,9 +49,12 @@ async function SignUp() {
       const response = await Connection.signUp(data);
       console.log(response.data);
       if (response.data === "") {
+
+        //Incluir mensaje de que ya existe ese usuario (con TimeOut)
         router.push("/loginSignUp");
       }
       else {
+        //Querria decir que es un usuario nuevo, se ha dado de alta ya y los datos estan en pinia
         userStore.uName=response.data.userName;
         userStore.uEmail=response.data.userEmail;
         userStore.uPass=response.data.userPassword;

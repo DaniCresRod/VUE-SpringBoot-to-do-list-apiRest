@@ -27,4 +27,9 @@ public class loginControl {
     public loginModel addUser(@RequestBody loginModel newData){
         return myService.addNewUser(newData);
     }
+
+    @PostMapping(path="/favs")
+    public boolean addFavs(@RequestBody loginModel userData){
+        return myService.addFavs(userData);
+    }
 }

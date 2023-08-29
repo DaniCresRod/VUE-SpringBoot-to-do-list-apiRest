@@ -42,7 +42,22 @@ public class loginServices {
         }
     }
 
-    //public loginModel
+    public boolean addFavs(loginModel userData) {
+        try{
+            if(myRepo.findByUserEmailAndUserPassword(userData.getUserEmail(), userData.getUserPassword())!=null){
+                myRepo.save(userData);
+                return true;
+            }
+            else return false;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+
 
 
 }
