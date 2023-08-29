@@ -28,7 +28,7 @@ async function Login(){
       userStore.uName=response.data.userName;
       userStore.uPass=response.data.userPassword;
       userStore.uFavs=response.data.userFavs;
-      router.push("/favorites");
+      router.push("/favs");
     }
     else{
       

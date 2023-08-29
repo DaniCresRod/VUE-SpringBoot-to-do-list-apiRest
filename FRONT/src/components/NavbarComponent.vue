@@ -8,13 +8,12 @@
 
       <v-spacer></v-spacer>
 
-      <RouterLink to="/favs">
+      <RouterLink to="/favorites">
         <v-btn variant="text" icon="mdi-heart"></v-btn>
       </RouterLink>
 
-      <RouterLink to="/products">
-       <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = !overlay"></v-btn>
-      </RouterLink>
+      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = !overlay"></v-btn>
+
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
     </v-app-bar>
 
@@ -23,13 +22,17 @@
         <RouterLink
           class="itemList"
           v-for="item in items"
-          :key="item.name"
+          :key="item.title"
           :to="item.route"
         >
           {{ item.title }}
         </RouterLink>
       </v-list>
     </v-navigation-drawer>
+
+    <!-- <div class="image-container">
+      <img class="grayscale" src="/public/tshirt_back.jpg" alt="fabrica de camisetas" />
+    </div> -->
 
     <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
       <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
@@ -43,10 +46,6 @@
 import { ref, watch, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import FormComponent from '@/components/FormComponent.vue';
-import Team from '@/views/Team.vue';
-
-
-
 
 const drawer = ref(false);
 const group = ref(null);
@@ -54,20 +53,24 @@ const overlay = ref(false);
 
 const items = [
   {
-    name: 'Home',
+    title: 'Home',
     route: '/',
   },
   {
-    name: 'Team',
+    title: 'Team',
     route: '/team',
   },
   {
-    name: 'Login',
-    route: '/login',
+    title: 'Services',
+    route: '/services',
   },
   {
-    name: 'SignUp',
-    route: '/SignUp',
+    title: 'Contact Us',
+    route: '/contact',
+  },
+  {
+    title: 'Login',
+    route: '/login',
   },
 ];
 
