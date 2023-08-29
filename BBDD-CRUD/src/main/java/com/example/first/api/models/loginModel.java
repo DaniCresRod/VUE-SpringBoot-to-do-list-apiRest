@@ -31,7 +31,7 @@ public class loginModel {
     @Value("Normal")
     private String userType;
 
-    @Column(name="UserFavorites")
+    @Column(name="UserFavorites", columnDefinition = "TEXT")
     @Value("no tengo, soy asi de rancio")
     private String userFavs;
 

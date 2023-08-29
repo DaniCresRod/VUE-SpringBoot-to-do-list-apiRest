@@ -87,15 +87,26 @@ const validateForm = async () => {
         };
 
         try{
-          const response=await Connection.create(data);
+          // const response=await Connection.create(data);
           
-          if(response.data!=""){
+          // if(response.data!=""){
             
-            router.push("/favorites");
-          }
-          else{
+          //   router.push("/favorites");
+          // }
+          // else{
             
-          }
+          // }
+
+          const favsData = {
+          userEmail: userStore.uEmail,
+          userPassword: userStore.uPass,
+          userName: userStore.uName,
+          userFavs: userStore.uFavs 
+        };
+
+        Connection.saveFavs(favsData);        
+
+        router.push("/favorites");   
           
         }  
         catch(error){

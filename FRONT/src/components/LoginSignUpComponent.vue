@@ -58,6 +58,16 @@ async function SignUp() {
         userStore.uName=response.data.userName;
         userStore.uEmail=response.data.userEmail;
         userStore.uPass=response.data.userPassword;
+
+        const favsData = {
+          userEmail: userStore.uEmail,
+          userPassword: userStore.uPass,
+          userName: userStore.uName,
+          userFavs: userStore.uFavs 
+        };
+
+        Connection.saveFavs(favsData);        
+
         router.push("/favorites");        
       }
     }

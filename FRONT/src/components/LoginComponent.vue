@@ -44,7 +44,15 @@ async function Login(){
       //Mete en pinia todos los favoritos para poder visualizarlos
       userStore.uFavs = JSON.stringify(favsArray.value);
 
-      //Resubir nuevos favoritos a la base de datos      
+      //Resubir nuevos favoritos a la base de datos 
+      const favsData = {
+          userEmail: userStore.uEmail,
+          userPassword: userStore.uPass,
+          userName: userStore.uName,
+          userFavs: userStore.uFavs 
+        };
+
+        Connection.saveFavs(favsData);     
 
       router.push("/favorites");
     }
