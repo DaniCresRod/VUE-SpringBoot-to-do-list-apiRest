@@ -13,7 +13,7 @@
 
       <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = !overlay"></v-btn>
 
-      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+      <v-btn variant="text" icon="mdi-dots-vertical" @click="deleteLog()"></v-btn>
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" location="top" temporary>
@@ -41,6 +41,7 @@
 import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import FormComponent from '@/components/FormComponent.vue';
+import deleteLog from '@/services/UnloggService'
 
 const drawer = ref(false);
 const group = ref(null);

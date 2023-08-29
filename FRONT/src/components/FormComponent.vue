@@ -18,6 +18,7 @@ const prodColorOptions = [
   "Negro",
   "Azul",
 ];
+const prodId=ref();
 const prodSize = ref("");
 const prodColor = ref("");
 const checkbox = ref(false);
@@ -55,7 +56,8 @@ const validateForm = async () => {
 
       //Añadir en el PiniaStore el favorito
       const userStore = myUserStore(); 
-      let thisArticle={prodMessage: prodMessage.value,
+      let thisArticle={
+        prodMessage: prodMessage.value,
         prodType: prodType.value,
         prodSize:
           prodType.value === "Camiseta" || prodType.value === "Sudadera"

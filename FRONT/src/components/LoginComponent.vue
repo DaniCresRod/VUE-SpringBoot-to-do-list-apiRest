@@ -29,6 +29,7 @@ async function Login(){
       userStore.uEmail = response.data.userEmail;
       userStore.uName = response.data.userName;
       userStore.uPass = response.data.userPassword;
+      userStore.uFavs = response.data.userFavs;
 
       //Pasa al array los favoritos que pudiera haber en la base de datos
       (JSON.parse(response.data.userFavs)).forEach(element => {
