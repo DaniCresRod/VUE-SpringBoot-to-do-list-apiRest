@@ -30,8 +30,12 @@
       </v-list>
     </v-navigation-drawer>
 
+    <div class="image-container">
+      <img class="grayscale" src="/public/tshirt_back.jpg" alt="fabrica de camisetas" />
+    </div>
+
     <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
-      <div class="my-overlay-content">
+      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
         <FormComponent />
       </div>
     </v-overlay>
@@ -86,7 +90,7 @@ const handleScroll = () => {
   if (rect.top < 0) {
     showNavbar.value = true;
     // Ajusta el valor del filtro en función de la posición de scroll
-    const brightnessValue = Math.max(0, 1 + rect.top / 1000);
+    const brightnessValue = Math.max(0, 1 + rect.top / 700);
     imageSection.value.style.filter = `brightness(${brightnessValue})`;
   } else {
     showNavbar.value = false;
@@ -96,9 +100,28 @@ const handleScroll = () => {
 </script>
 
 <style scoped>
+.image-container {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+    cursor: none;
+  }
+  
+  .grayscale {
+    width: 100%;
+    height: auto;
+    filter: grayscale(100%);
+    transition: filter 0.3s, transform 0.3s;
+  }
+  
+  .image-container:hover .grayscale {
+    filter: none;
+    transform: scale(1.2);
+  }
 .bg-image {
-  height: 100vh;
-  background-image: url('C:\Users\toyos\OneDrive\Escritorio\to-do-list-apiRest\FRONT\public\tshirts.jpg');
+  height: 75vh;
+  background-image: url('\tshirts.jpg');
   background-size: cover;
   background-position: center;
   backdrop-filter: blur(5px);
@@ -118,17 +141,13 @@ const handleScroll = () => {
   margin-left: 1rem;
 }
 .my-overlay-content {
-   padding:4rem;
-   border-radius:.3rem;
-   max-height:80vh;
-   overflow-y:auto;
-   background-color:white;
-   z-index:2001;
+  padding: 4rem;
+  border-radius: 0.3rem;
 }
-.my-overlay-content::-webkit-scrollbar{
-   display:none;
+.my-overlay-content::-webkit-scrollbar {
+  display: none;
 }
 .my-navbar {
-   transition: opacity .20s ease-in-out;
+   transition: opacity .5s ease-in-out;
 }
 </style>
