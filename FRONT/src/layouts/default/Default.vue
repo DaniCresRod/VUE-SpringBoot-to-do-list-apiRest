@@ -19,6 +19,7 @@
     margin-top: 50px;
     padding: 50px 10px;
   }
+  
   .v-overlay__content {
     z-index: 2001;
     opacity: 100%;

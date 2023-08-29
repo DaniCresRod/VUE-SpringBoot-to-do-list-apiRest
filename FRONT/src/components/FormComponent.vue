@@ -72,7 +72,7 @@ import ProductData from "@/services/ProductDataService";
 const prodMessage = ref("");
 const messageRules = [
   (v) => !!v || "Frase es obligatoria",
-  (v) => (v && v.length <= 20) || "La frase debe tener menos de 20 caracteres",
+  (v) => (v && v.length <= 30) || "La frase debe tener menos de 30 caracteres",
 ];
 const prodType = ref("");
 const items = ["Camiseta", "Sudadera", "Taza", "Botella"];
@@ -90,7 +90,7 @@ const checkbox = ref(false);
 let isFormValid = computed(() => {
   return (
     prodMessage.value.length > 0 &&
-    prodMessage.value.length <= 20 &&
+    prodMessage.value.length <= 30 &&
     !!prodMessage.value &&
     !!prodType.value &&
     (!["Camiseta", "Sudadera"].includes(prodType.value) || !!prodSize.value) &&
