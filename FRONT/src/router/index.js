@@ -1,55 +1,46 @@
-// Composables
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '@/views/Home.vue'
+import Favs from '@/views/Favs.vue'
+import Login from '@/views/Login.vue'
+import Products from '@/views/Products.vue'
+import SignUp from '@/views/SignUp.vue'
+import Team from '@/views/Team.vue'
+
+
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-  {
-    path: '/',
-    component: () => import('@/layouts/default/Default.vue'),
-    children: [
       {
-        path: '',
+        path: '/',
         name: 'Home',
-        component: () => import('@/layouts/default/View.vue'),
+        component: Home,
       },
       {
-        path: '/team',
-        name: 'Team',
-        component: () => import('@/layouts/Team.vue'),
-      },
-      {
-        path: '/services',
-        name: 'Services',
-        component: () => import('@/layouts/Services.vue'),
-      },
-      {
-        path: '/contact',
-        name: 'Contact Us',
-        component: () => import('@/layouts/ContactUs.vue'),
-      },
-      {
-        path: '/favorites',
-        name: 'Favorites',
-        component: () => import('@/components/FavoriteComponent.vue'),
+        path: '/favs',
+        name: 'Favs',
+        component: Favs,
       },
       {
         path: '/login',
         name: 'Login',
-        component: () => import('@/components/LoginComponent.vue'),
+        component: Login,
       },
       {
-        path: '/loginSignUp',
-        name: 'UserSignUp',
-        component: () => import('@/components/LoginSignUpComponent.vue'),
+        path: '/sign',
+        name: 'SignUp',
+        component: SignUp,
       },
       {
-        path: '/form',
-        name: 'Form',
-        component: () => import('@/components/FormComponent.vue'),
+        path: '/products',
+        name: 'Products',
+        component: Products,
       },
-      
-      
-    ],
-  },
+      {
+        path: '/team',
+        name: 'Team',
+        component: Team,
+      },
 ]
 
 const router = createRouter({
