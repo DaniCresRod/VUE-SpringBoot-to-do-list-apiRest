@@ -47,6 +47,7 @@ const routes = [
         component: () => import('@/components/FormComponent.vue'),
       },
       
+      
     ],
   },
 ]
