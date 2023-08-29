@@ -98,9 +98,10 @@ const handleScroll = () => {
 <style scoped>
 .bg-image {
   height: 100vh;
-  background-image: url('\tshirts.jpg');
+  background-image: url('C:\Users\toyos\OneDrive\Escritorio\to-do-list-apiRest\FRONT\public\tshirts.jpg');
   background-size: cover;
   background-position: center;
+  backdrop-filter: blur(5px);
 }
 .itemList {
   text-decoration: none;
