@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
+import Connection from '../services/LoginDataService'
 import {myUserStore} from '@/services/PiniaStore'
 
 const cards = ref([]);
@@ -19,8 +20,7 @@ const favoriteForm = async () => {
     //   src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
     //   }));
 
-   //console.log(userStore.uFavs.length);
-    console.log(userStore.uFavs);
+   
     //Si hay favoritos, meterlos en un array como objetos JS
       if(userStore.uFavs!==''){
         (JSON.parse(userStore.uFavs)).forEach(element => {
@@ -49,11 +49,43 @@ const cancelfavorite = async (productId) => {
   try {
     await ProductData.delete(productId);
     console.log("Eliminado de favoritos");
-    
+
   } catch (error) {
     console.log("No se ha podido eliminar de favoritos", error);
   }
 };
+
+function deleteFavs(event){
+  console.log(event.target.parentNode.parentNode.parentNode.parentNode.parentNode);
+  console.log(event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes);
+  
+  let myTarget=event.target.parentNode.parentNode.parentNode.parentNode.parentNode;
+  let parentOfTarget=event.target.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.childNodes;
+  
+  let indexOfTarget=Array.from(parentOfTarget).indexOf(myTarget);
+
+  favsArray.value=JSON.parse(userStore.uFavs);
+
+  (favsArray.value).splice(indexOfTarget-1,1);
+
+  userStore.uFavs=JSON.stringify(favsArray.value);
+
+  if(userStore.uEmail!==''){
+    try{
+      const favsData = {
+      userEmail: userStore.uEmail,
+      userPassword: userStore.uPass,
+      userName: userStore.uName,
+      userFavs: userStore.uFavs 
+      };
+
+      Connection.saveFavs(favsData); 
+    }  
+    catch(error){
+      console.log(error);
+    }
+  }
+}
 
 favoriteForm();
 </script>
@@ -86,7 +118,7 @@ favoriteForm();
                 <v-card-subtitle class="mt-4 text-subtitle-2" v-text="'Talla ' + (card.prodType === 'Camiseta' || card.prodType === 'Sudadera' ? card.prodSize : 'Única')"></v-card-subtitle>
                 <v-spacer></v-spacer>
   
-                <v-btn size="medium" color="surface-variant" variant="text" @click="cancelfavorite(card.id)"><i class="fas fa-heart-broken"></i></v-btn>
+                <v-btn size="medium" color="surface-variant" variant="text" @click="deleteFavs"><i class="fas fa-heart-broken"></i></v-btn>
 
                 <v-btn size="medium" color="surface-variant" variant="text"><i class="fa fa-shopping-cart" aria-hidden="true"></i></v-btn>
   
