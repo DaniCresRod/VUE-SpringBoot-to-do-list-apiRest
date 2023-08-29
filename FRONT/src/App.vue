@@ -1,8 +1,8 @@
 <script setup>
   import NavbarComponent from '@/components/NavbarComponent.vue';
   import FooterComponent from '@/components/FooterComponent.vue';
+  import Home from '@/views/Home.vue';
   import { RouterView } from 'vue-router';
-  import Home from '@/views/Home.vue'
 </script>
 
 <template>
