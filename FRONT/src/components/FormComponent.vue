@@ -150,12 +150,6 @@ const handleScroll = () => {
 </script>
 
 <style scoped>
-.bg-image {
-  height: 100vh;
-  background-image: url('https://picsum.photos/200');
-  background-size: cover;
-  background-position: center;
-}
 .mt-4 {
   text-decoration: none;
   transition: 0.3s;
