@@ -9,5 +9,5 @@ function deleteLog(){
     userStore.uFavs = '';
 }
 
-export default deleteLog();
+export default deleteLog;
 

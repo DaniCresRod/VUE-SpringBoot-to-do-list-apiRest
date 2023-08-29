@@ -8,7 +8,7 @@ const visible=ref();
 const myEmail=ref();
 const myPass=ref();
 
-const favsArray=ref([])
+const favsArray1=ref([])
 
 const userStore = myUserStore(); 
 
@@ -20,31 +20,67 @@ async function Login(){
     userEmail: myEmail.value,
     userPassword: myPass.value
   };
-
+  console.log(favsArray1.value);
   try{
     const response=await Connection.create(data);
-    
-    if (response.data != "") {
+    console.log(response.data);
+    if (response.data !== "") {
 
       userStore.uEmail = response.data.userEmail;
       userStore.uName = response.data.userName;
       userStore.uPass = response.data.userPassword;
-      userStore.uFavs = response.data.userFavs;
-
+      //userStore.uFavs = response.data.userFavs;
+      
+      console.log(JSON.parse(response.data.userFavs));
       //Pasa al array los favoritos que pudiera haber en la base de datos
-      (JSON.parse(response.data.userFavs)).forEach(element => {
-        favsArray.value.push(element);
+      (JSON.parse(response.data.userFavs)).forEach(element => {        
+        favsArray1.value.push(element);        
       });
+      console.log(favsArray1.value);
 
-      //Pasa al array los favoritos que haya en pinia
-      (JSON.parse(userStore.uFavs)).forEach(element => {
-        favsArray.value.push(element);
+      //Pasa al array los favoritos que haya en pinia, si hay...
+      if(userStore.uFavs!==""){
+        (JSON.parse(userStore.uFavs)).forEach(element => {
 
-      });
+          console.log(element);
+          console.log(favsArray1.value);
 
+          let duplicated=false;
+
+          (favsArray1.value).forEach(eachComp=>{            
+
+            //Revisa cada valor de cada componente del array y lo compara con los favoritos
+            //Si encuentra alguna coincidencia total, no deja que ese elemento se guarde
+            if((((eachComp.prodMessage).localeCompare(element.prodMessage))
+              +((eachComp.prodType).localeCompare(element.prodType))
+              +((eachComp.prodColor).localeCompare(element.prodColor))===0)              
+            ){ 
+              if(((eachComp.prodSize)===null)||((element.prodSize)===null)){
+                if(((eachComp.prodSize)===null)&&((element.prodSize)===null)){
+                  duplicated=true;
+                }
+              }
+              else if (((eachComp.prodSize).localeCompare(element.prodSize))===0){
+                duplicated=true;
+              }          
+                          
+            }      
+        
+          });
+
+          if(!duplicated){
+            favsArray1.value.push(element);
+          }
+
+          // if(!((favsArray1.value).includes(element))){
+          //   favsArray1.value.push(element);
+          // }        
+        });
+      }      
+      console.log(favsArray1.value);
       //Mete en pinia todos los favoritos para poder visualizarlos
-      userStore.uFavs = JSON.stringify(favsArray.value);
-
+      userStore.uFavs = JSON.stringify(favsArray1.value);
+      console.log(userStore.uFavs);
       //Resubir nuevos favoritos a la base de datos 
       const favsData = {
           userEmail: userStore.uEmail,

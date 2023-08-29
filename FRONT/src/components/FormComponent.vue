@@ -74,9 +74,30 @@ const validateForm = async () => {
           favsArray.value.push(element);
         });
       }
+      let duplicated = false;
+      (favsArray.value).forEach(eachComp => {
 
-      //Añadir el objeto actual
-      favsArray.value.push(thisArticle);
+        //Revisa cada valor de cada componente del array y lo compara con los favoritos
+        //Si encuentra alguna coincidencia total, no deja que ese elemento se guarde
+        if ((((eachComp.prodMessage).localeCompare(thisArticle.prodMessage))
+          + ((eachComp.prodType).localeCompare(thisArticle.prodType))
+          + ((eachComp.prodColor).localeCompare(thisArticle.prodColor)) === 0)) {
+          
+          if (((eachComp.prodSize) === null) || ((thisArticle.prodSize) === null)) {
+            if (((eachComp.prodSize) === null) && ((thisArticle.prodSize) === null)) {
+              duplicated = true;
+            }
+          }
+          else if (((eachComp.prodSize).localeCompare(thisArticle.prodSize)) === 0) {
+            duplicated = true;
+          }
+        }
+      });
+
+      if (!duplicated) {
+        favsArray.value.push(thisArticle);
+      }
+
       //Guardarlo todo en el userStore como string
       userStore.uFavs=JSON.stringify(favsArray.value);
       
