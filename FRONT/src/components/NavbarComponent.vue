@@ -60,8 +60,8 @@ const items = [
     route: '/team',
   },
   {
-    title: 'Services',
-    route: '/services',
+    title: 'Products',
+    route: '/products',
   },
   {
     title: 'Contact Us',
