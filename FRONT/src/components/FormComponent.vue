@@ -1,5 +1,72 @@
+<template>
+  <div>
+    <div class="bg-image" ref="imageSection"></div>
+    <v-app-bar v-if="showNavbar" app>
+      <v-toolbar-title>Navbar</v-toolbar-title>
+    </v-app-bar>
+    <v-main>
+      <v-container fluid>
+        <h2>Personaliza tu propio producto</h2>
+        <v-sheet width="300" class="mx-auto">
+          <v-form ref="form">
+            <v-text-field
+              v-model="prodMessage"
+              :counter="20"
+              :rules="messageRules"
+              label="Escribe una frase!"
+              required
+            ></v-text-field>
+
+            <v-select
+              v-model="prodType"
+              :items="items"
+              :rules="[v => !!v || 'El tipo de producto es necesario']"
+              label="Producto"
+              required
+            ></v-select>
+
+            <v-select
+              v-if="prodType === 'Camiseta' || prodType === 'Sudadera'"
+              v-model="prodSize"
+              :items="prodSizeOptions"
+              :rules="[v => !!v || 'La talla es necesaria']"
+              label="Talla"
+            ></v-select>
+
+            <v-select
+              v-model="prodColor"
+              :items="prodColorOptions"
+              :rules="[v => !!v || 'El color es obligatorio']"
+              label="Color"
+            ></v-select>
+
+            <v-checkbox
+              v-model="checkbox"
+              :rules="[v => !!v || 'Acepta para continuar']"
+              label="¿Estás de acuerdo?"
+              required
+            ></v-checkbox>
+
+            <div class="d-flex flex-column">
+              <!-- Botón con validación -->
+              <v-btn ref="formBtn" class="mt-4" block :disabled="!isFormValid" @click="validateForm">
+                Enviar Modelo
+              </v-btn>
+            </div>
+
+            <!-- Mensaje de confirmación -->
+            <div v-if="showConfirmation" class="confirMessage">
+              ¡El formulario se ha enviado correctamente!
+            </div>
+          </v-form>
+        </v-sheet>
+      </v-container>
+    </v-main>
+  </div>
+</template>
+
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, onMounted } from "vue";
 import ProductData from "@/services/ProductDataService";
 
 const prodMessage = ref("");
@@ -66,69 +133,29 @@ const validateForm = async () => {
 
 };
 
+const showNavbar = ref(false);
+const imageSection = ref(null);
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+const handleScroll = () => {
+  if (window.pageYOffset > imageSection.value.clientHeight) {
+    showNavbar.value = true;
+  } else {
+    showNavbar.value = false;
+  }
+};
 </script>
 
-Listas con <span></span>
-
-<template>
-  <h2>Personaliza tu propio producto</h2>
-  <v-sheet width="300" class="mx-auto">
-    <v-form ref="form">
-      <v-text-field
-        v-model="prodMessage"
-        :counter="20"
-        :rules="messageRules"
-        label="Escribe una frase!"
-        required
-      ></v-text-field>
-
-      <v-select
-        v-model="prodType"
-        :items="items"
-        :rules="[v => !!v || 'El tipo de producto es necesario']"
-        label="Producto"
-        required
-      ></v-select>
-
-      <v-select
-        v-if="prodType === 'Camiseta' || prodType === 'Sudadera'"
-        v-model="prodSize"
-        :items="prodSizeOptions"
-        :rules="[v => !!v || 'La talla es necesaria']"
-        label="Talla"
-      ></v-select>
-
-      <v-select
-        v-model="prodColor"
-        :items="prodColorOptions"
-        :rules="[v => !!v || 'El color es obligatorio']"
-        label="Color"
-      ></v-select>
-
-      <v-checkbox
-        v-model="checkbox"
-        :rules="[v => !!v || 'Acepta para continuar']"
-        label="¿Estás de acuerdo?"
-        required
-      ></v-checkbox>
-
-      <div class="d-flex flex-column">
-        <!-- Botón con validación -->
-        <v-btn ref="formBtn" class="mt-4" block :disabled="!isFormValid" @click="validateForm">
-          Enviar Modelo
-        </v-btn>
-      </div>
-
-      <!-- Mensaje de confirmación -->
-      <div v-if="showConfirmation" class="confirMessage">
-        ¡El formulario se ha enviado correctamente!
-      </div>
-    </v-form>
-  </v-sheet>
-</template>
-
 <style scoped>
-
+.bg-image {
+  height: 100vh;
+  background-image: url('https://picsum.photos/200');
+  background-size: cover;
+  background-position: center;
+}
 .mt-4 {
   text-decoration: none;
   transition: 0.3s;

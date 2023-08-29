@@ -22,7 +22,7 @@ const generateSrc = (prodType) => {
 
 const favoriteForm = async () => {
   try {
-    const response = await ProductData.getAll({ type: selectedProdType.value });
+    const response = await ProductData.getAll();
     cards.value = response.data.map((product) => ({
       id: product.id,
       prodMessage: product.prodMessage,

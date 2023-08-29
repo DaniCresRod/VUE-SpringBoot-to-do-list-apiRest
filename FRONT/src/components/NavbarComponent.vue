@@ -1,6 +1,7 @@
 <template>
   <div>
-    <v-app-bar color="primary" prominent>
+    <div class="bg-image" ref="imageSection"></div>
+    <v-app-bar v-if="showNavbar" color="primary" prominent class="my-navbar">
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
@@ -38,7 +39,7 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { RouterLink } from 'vue-router';
 import FormComponent from '@/components/FormComponent.vue';
 
@@ -73,9 +74,34 @@ watch(group, () => {
   drawer.value = false;
 });
 
+const showNavbar = ref(false);
+const imageSection = ref(null);
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll);
+});
+
+const handleScroll = () => {
+  const rect = imageSection.value.getBoundingClientRect();
+  if (rect.top < 0) {
+    showNavbar.value = true;
+    // Ajusta el valor del filtro en función de la posición de scroll
+    const brightnessValue = Math.max(0, 1 + rect.top / 700);
+    imageSection.value.style.filter = `brightness(${brightnessValue})`;
+  } else {
+    showNavbar.value = false;
+    imageSection.value.style.filter = 'none';
+  }
+};
 </script>
 
-<style>
+<style scoped>
+.bg-image {
+  height: 100vh;
+  background-image: url('C:\Users\toyos\OneDrive\Escritorio\to-do-list-apiRest\FRONT\public\tshirts.jpg');
+  background-size: cover;
+  background-position: center;
+}
 .itemList {
   text-decoration: none;
   color: rgba(54, 157, 178, 1);
@@ -97,5 +123,7 @@ watch(group, () => {
 .my-overlay-content::-webkit-scrollbar {
   display: none;
 }
-
+.my-navbar {
+   transition: opacity .5s ease-in-out;
+}
 </style>
