@@ -3,7 +3,7 @@ import { ref } from "vue";
 import ProductData from "@/services/ProductDataService";
 import {myUserStore} from '@/services/PiniaStore';
 import Connection from '../services/LoginDataService';
-
+import router from "@/router"
 
 
 const cards = ref([]);
@@ -87,6 +87,7 @@ function deleteFavs(event){
       console.log(error);
     }
   }
+  router.push("/refreshFavs");
 }
 
 favoriteForm();

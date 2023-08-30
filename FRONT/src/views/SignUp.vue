@@ -27,11 +27,11 @@ let rules = {
 };
 
 function myReset() {
-  location.reload();
+  router.push("/blank");
 }
 
 function navigateBack() {
-  router.push("/login")
+  router.push("/login");
 }
 
 async function SignUp() {
