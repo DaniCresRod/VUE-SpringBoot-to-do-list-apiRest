@@ -50,7 +50,9 @@ const closeOverlay = (newValue) => {
         <v-btn variant="text" icon="mdi-heart"></v-btn>
       </RouterLink>
 
-      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true"></v-btn>
+      <!-- <RouterLink to="/team" > -->
+        <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" ></v-btn>
+      <!-- </RouterLink> -->
 
       <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
     </v-app-bar>

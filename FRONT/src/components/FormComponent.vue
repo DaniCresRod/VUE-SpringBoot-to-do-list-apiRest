@@ -132,7 +132,8 @@ const validateForm = async () => {
 
         Connection.saveFavs(favsData);
 
-        router.push("/favs");
+        // router.push("/");
+        // router.push("/favs");
 
         }
         catch(error){
@@ -140,6 +141,8 @@ const validateForm = async () => {
         }
 
       }
+
+
 
 
       // Mostrar el mensaje de confirmación al enviar el form
@@ -150,6 +153,7 @@ const validateForm = async () => {
       //Actualizar la página después de 1.5 segundos
       setTimeout(() => {
         emit('closeOverlay', false);
+        router.push("/");
        }, 1500);
 
     } catch (error) {
