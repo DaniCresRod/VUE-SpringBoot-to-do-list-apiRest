@@ -14,10 +14,10 @@ const isLoading = ref(false);
 const myPass = ref(undefined);
 const userName = ref(undefined);
 
-const emailValidationRule = (v) => !!(v || '').match(/@/) || 'Please enter a valid email';
-const lengthValidationRule = (len) => (v) => (v || '').length >= len || `Invalid character length, required ${len}`;
-const passwordValidationRule = (v) => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password must contain an upper case letter, a numeric character, and a special character';
-const requiredValidationRule = (v) => !!v || 'This field is required';
+const emailValidationRule = (v) => !!(v || '').match(/@/) || 'Introduce una dirección de email válida';
+const lengthValidationRule = (len) => (v) => (v || '').length >= len || `Se requiere una longitud de ${len} caracteres`;
+const passwordValidationRule = (v) => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'La contraseña debe incluir, al menos, una mayúscula, un número y un caracter especial';
+const requiredValidationRule = (v) => !!v || 'Este campo es obligatorio';
 
 let rules = {
   email: emailValidationRule,
@@ -99,8 +99,8 @@ async function SignUp() {
         type="email"></v-text-field>
       <v-checkbox v-model="agreement" :rules="[rules.required]" color="deep-purple">
         <template v-slot:label>
-          acepto los&nbsp;
-          <a href="#" @click.stop.prevent="dialog = true">Terminos del servicio</a>
+          Acepto los&nbsp;
+          <a href="#" @click.stop.prevent="dialog = true">Términos del servicio</a>
           *
         </template>
       </v-checkbox>
@@ -115,16 +115,18 @@ async function SignUp() {
     </v-card-actions>
     <v-dialog v-model="dialog" max-width="400" persistent>
       <v-card>
-        <v-card-title class="text-h5 bg-grey-lighten-3"> Legal </v-card-title>
+        <v-card-title class="text-h5 bg-grey-lighten-3"> Aviso Legal </v-card-title>
         <v-card-text>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </v-card-text>
+          Bajo el reglamento europeo los consumidores tienen los siguientes derechos:
+
+Derecho al acceso – a ver u obtener los datos personales que se han recopilado
+Derecho a la rectificación – a corregir datos incompletos o incorrectos sobre ellos
+Derecho a la eliminación – a pedir la eliminación de sus datos personales (también conocido como “”derecho al olvido””)
+Derecho a la restricción al tratamiento – a limitar qué datos personales sobre ellos pueden ser tratados y con qué fines
+Derecho a oposición (al tratamiento) – a rechazar totalmente el tratamiento de sus datos
+Derecho a la notificación – en relación a la rectificación, eliminación, o restricción del tratamiento
+Derecho a la portabilidad – a recibir una copia de sus datos en un formato empleable para ser llevados a otro lugar
+Derecho en relación a la toma de decisiones automatizada, incluyendo la cración de perfiles – a rechazar el uso de tecnologías para tomar decisiones sobre el usuario        </v-card-text>
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn variant="text" @click="agreement = false, dialog = false">

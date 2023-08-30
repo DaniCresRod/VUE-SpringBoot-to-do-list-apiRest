@@ -17,7 +17,7 @@ const items = [
     route: '/team',
   },
   {
-    title: 'Products',
+    title: 'Productos',
     route: '/products',
   },
   {
@@ -60,6 +60,9 @@ const closeOverlay = (newValue) => {
 
     </v-app-bar>
 
+    <!-- Aquí agregamos el banner de imagen con una condición para que solo se muestre en la página de inicio -->
+    <div v-if="$route.path === '/'" class="banner"></div>
+
     <v-navigation-drawer v-model="drawer" location="top" temporary>
       <v-list>
         <RouterLink
@@ -87,13 +90,13 @@ const closeOverlay = (newValue) => {
   color: rgba(54, 157, 178, 1);
 }
 .itemList:hover {
-  letter-spacing: 0.60rem;
+  letter-spacing: 0.3rem;
   font-weight: bolder;
 }
 .v-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.6rem;
   margin-left: 1rem;
 }
 .my-overlay-content {
@@ -109,5 +112,14 @@ const closeOverlay = (newValue) => {
 a{
   text-decoration: none;
   color: white;
+}
+
+/* Aquí agregamos los estilos para el banner de imagen */
+.banner {
+    width: 100%;
+    height: 825px;
+    background-image: url('../../public/tshirts_edit.jpg');
+    background-size: cover;
+    background-position: center;
 }
 </style>

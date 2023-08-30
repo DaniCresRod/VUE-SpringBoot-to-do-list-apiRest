@@ -4,15 +4,14 @@ export default {
     links: [
       { name: 'Home', route: '/' },
       { name: 'Team', route: '/team' },
-      { name: 'Products', route: '/products' },
+      { name: 'Productos', route: '/products' },
 
     ],
   }),
 };
 </script>
-
 <template>
-  <v-footer class="bg-grey-lighten-1">
+  <v-footer class="custom-footer">
     <v-row justify="center" no-gutters>
       <router-link
         v-for="link in links"
@@ -31,22 +30,29 @@ export default {
     </v-row>
   </v-footer>
 </template>
+
 <style scoped>
-footer {
-  height: 200px !important;
+.custom-footer {
+  background: linear-gradient(to right, rgba(54, 157, 178, 1), rgba(195, 232, 236, 1));
+  color: white;
+  padding: 20px; /* Ajusta el padding según tus necesidades */
+  height: auto !important; /* Ajusta la altura según tus necesidades */
 }
+
 .links {
   color: white;
   text-decoration: none;
   transition: 0.3s;
 }
-.links:hover{
+
+.links:hover {
   color: rgba(54, 157, 178, 1);
   letter-spacing: 0.15rem;
   padding: 0 1rem;
   font-weight: bolder;
 }
-.footerText{
+
+.footerText {
   color: rgba(54, 157, 178, 1);
 }
 </style>
