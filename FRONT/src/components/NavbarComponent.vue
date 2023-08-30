@@ -44,7 +44,7 @@ watch(group, () => {
 .v-list {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.6rem;
   margin-left: 1rem;
 }
 .my-overlay-content {
