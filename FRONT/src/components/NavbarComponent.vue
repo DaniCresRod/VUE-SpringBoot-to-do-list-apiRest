@@ -33,28 +33,31 @@ watch(group, () => {
 const closeOverlay = (newValue) => {
   overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
 };
-
 </script>
-
 
 <template>
   <div>
     <v-app-bar color="primary" prominent>
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-      <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
+        <v-toolbar-title class="text-no-wrap" title="Application">
+          <RouterLink to="/">
+            Tods List
+          </RouterLink>
+        </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
       <RouterLink to="/favs">
-        <v-btn variant="text" icon="mdi-heart"></v-btn>
+        <v-btn variant="text" icon="mdi mdi-heart"></v-btn>
       </RouterLink>
 
-      <!-- <RouterLink to="/team" > -->
-        <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" ></v-btn>
-      <!-- </RouterLink> -->
+      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" ></v-btn>
 
-      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
+      <RouterLink to="/login">
+        <v-btn variant="text" icon="mdi mdi-account-circle-outline"></v-btn>
+      </RouterLink>
+
     </v-app-bar>
 
     <v-navigation-drawer v-model="drawer" location="top" temporary>
@@ -102,5 +105,9 @@ const closeOverlay = (newValue) => {
 }
 .my-navbar {
     transition: opacity .5s ease-in-out;
+}
+a{
+  text-decoration: none;
+  color: white;
 }
 </style>
