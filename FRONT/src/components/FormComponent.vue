@@ -173,7 +173,7 @@ Listas con <span></span>
     <v-form ref="form">
       <v-text-field
         v-model="prodMessage"
-        :counter="20"
+        :counter="30"
         :rules="messageRules"
         label="Escribe una frase!"
         required
