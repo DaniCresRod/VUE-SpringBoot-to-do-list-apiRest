@@ -41,7 +41,7 @@ const closeOverlay = (newValue) => {
     <v-app-bar color="primary" prominent>
       <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
 
-        <v-toolbar-title class="text-no-wrap" title="Application">
+        <v-toolbar-title class="text-no-wrap icon-navbar" title="Application">
           <RouterLink to="/">
             Tods List
           </RouterLink>
@@ -50,13 +50,13 @@ const closeOverlay = (newValue) => {
       <v-spacer></v-spacer>
 
       <RouterLink to="/favs">
-        <v-btn variant="text" icon="mdi mdi-heart"></v-btn>
+        <v-btn variant="text" icon="mdi mdi-heart" class="i-navbar"></v-btn>
       </RouterLink>
 
-      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" ></v-btn>
+      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" class="i-navbar"></v-btn>
 
       <RouterLink to="/login">
-        <v-btn variant="text" icon="mdi mdi-account-circle-outline"></v-btn>
+        <v-btn variant="text" icon="mdi mdi-account-circle-outline" class="i-navbar"></v-btn>
       </RouterLink>
 
     </v-app-bar>
@@ -95,7 +95,7 @@ const closeOverlay = (newValue) => {
 .itemList:hover {
   letter-spacing: 0.3rem;
   font-weight: bolder;
-  background-color:rgba(54, 157, 178, 0.2); 
+  background-color:rgba(54, 157, 178, 0.2);
 }
 .v-list {
   display: flex;
@@ -130,5 +130,18 @@ a{
     background-position: center;
 }
 /* .v-main{padding-top: 0 !important;} */
-
+.icon-navbar{
+  transition: 0.3s;
+}
+.icon-navbar:hover{
+  letter-spacing: 0.1rem;
+  color: orange;
+}
+.i-navbar{
+  transition: 0.3s;
+}
+.i-navbar:hover{
+  color: orange;
+  background-color: rgba(210, 210, 210, 0.3)
+}
 </style>
