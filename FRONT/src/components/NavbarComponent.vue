@@ -18,7 +18,7 @@ const items = [
     route: '/team',
   },
   {
-    title: 'Products',
+    title: 'Productos',
     route: '/products',
   },
   {
@@ -38,7 +38,7 @@ watch(group, () => {
   color: rgba(54, 157, 178, 1);
 }
 .itemList:hover {
-  letter-spacing: 0.60rem;
+  letter-spacing: 0.3rem;
   font-weight: bolder;
 }
 .v-list {
