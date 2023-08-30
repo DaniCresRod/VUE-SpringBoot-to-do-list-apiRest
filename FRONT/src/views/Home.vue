@@ -142,7 +142,7 @@ const cerrarFormulario = () => {
 
 <template>
 
-  <h2 class="h2_home">BLABLABALBALABLABALABALABLABALBALABLABALA</h2>
+  <h2 class="h2_home">Nuestras Mierdas</h2>
    <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
