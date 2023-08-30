@@ -124,4 +124,6 @@ a{
     background-size: cover;
     background-position: center;
 }
+/* .v-main{padding-top: 0 !important;} */
+
 </style>

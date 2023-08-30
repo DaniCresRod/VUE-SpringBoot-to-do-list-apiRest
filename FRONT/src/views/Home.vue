@@ -1,10 +1,8 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-import {myUserStore} from '@/services/PiniaStore';
-import Connection from '../services/LoginDataService';
+import ProductData from "@/services/ProductDataService";
+import FormComponent from '@/components/FormComponent.vue'; 
 
-
-const userStore = myUserStore();
 const items= ref([
           {
             src: 'src/assets/biscocho_blanca.png',
@@ -62,35 +60,74 @@ const items= ref([
           },
         ]);
 
-const favoriteProduct = () => {
-  if(userStore.uEmail!== ''){
-    try{
-      const favsData = {
-      userEmail: userStore.uEmail,
-      userPassword: userStore.uPass,
-      userName: userStore.uName,
-      userFavs: userStore.uFavs
-      };
-      Connection.saveFavs(favsData);
-      
-  const updatedFavs = JSON.parse(userStore.uFavs);
+const isFavorite = (item) => {
+  return item.isFavorite;
+};
 
-      updatedFavs.forEach((favItem) => {
-      const matchingItem = items.value.find
-      (item => item.name === favItem.prodMessage && item.color === favItem.prodColor && favItem.prodType === "Camiseta");
-        if (matchingItem) {
-          matchingItem.isFavorite = true;
-        }
+const toggleFavorite = async (item) => {
+  if (!item.isFavorite) {
+    item.isFavorite = true;
+  
+    try {
+      const response = await ProductData.create({
+        prodMessage: item.name,
+        prodSize: " ",
+        prodType: "Camiseta",
+        prodColor: item.color
       });
+      console.log('Añadido a favoritos:', response.data);
+    } catch (error) {
+      console.log('Error', error);
     }
-    catch(error){
+  
+  } else {
+      item.isFavorite = false;
+
+    try {
+      const response = await ProductData.getAll();
+      const dataFromServer = response.data;
+      
+      const matchingItem = dataFromServer.find((serverItem) =>
+          serverItem.prodMessage === item.name &&
+          serverItem.prodColor === item.color &&
+          serverItem.prodType === "Camiseta"
+      );
+
+        if (matchingItem) {
+          try {
+            await ProductData.delete(matchingItem.id);
+            console.log("Eliminado de favoritos");
+          } catch (error) {
+            console.log("No se ha podido eliminar de favoritos", error);
+          }
+        }
+    } catch (error) {
       console.log(error);
     }
   }
 };
+
+const favoriteProduct = async () => {
+  try {
+    const response = await ProductData.getAll();
+    const dataFromServer = response.data;
+    console.log(dataFromServer);
+    
+    dataFromServer.forEach(serverItem => {
+      const matchingItem = items.value.find
+      (item => item.name === serverItem.prodMessage && item.color === serverItem.prodColor && serverItem.prodType === "Camiseta");
+      if (matchingItem) {
+        matchingItem.isFavorite = true;
+      }
+          });
+      } catch (error) {
+        console.log(error);
+      }
+    };
 onBeforeMount(() => {
   favoriteProduct();
 });
+
 const mostrarFormulario = ref(false);
 
 const abrirFormulario = () => {
@@ -101,38 +138,8 @@ const cerrarFormulario = () => {
   mostrarFormulario.value = false;
 };
 
-const isFavorite = (item) => {
-  return item.isFavorite;
-};
-
-const toggleFavorite = (item) => {
-  if (!item.isFavorite) {
-    item.isFavorite = true;
-    const newFavorite = {
-      prodMessage: item.name,
-      prodSize: ' ',
-      prodColor: item.color,
-      prodType: "Camiseta",
-    };
-    userStore.uFavs = JSON.stringify
-    ([...JSON.parse(userStore.uFavs), newFavorite]);
-    console.log('Añadido a favoritos:', userStore.uFavs);
-
-    Connection.saveFavs({ ...userStore.$state }); //actualiza base d datos
-  }
-  else {
-    item.isFavorite = false;
-    userStore.uFavs = JSON.stringify(
-      JSON.parse(userStore.uFavs).filter((favItem) =>
-        favItem.prodMessage !== item.name || favItem.prodColor !== item.color
-      )
-    );
-    console.log('Eliminado de favoritos:', userStore.uFavs);
-    
-    Connection.saveFavs({ ...userStore.$state });
-  }
-};
 </script>
+
 
 <template>
 
@@ -211,5 +218,9 @@ const toggleFavorite = (item) => {
 .h2_home{
   text-align: center;
   padding-bottom: 15px;
+}
+
+.v-btn{
+  margin-bottom: 25px ;
 }
 </style>
