@@ -5,7 +5,13 @@ import FormComponent from '@/components/FormComponent.vue';
 import {myUserStore} from '@/services/PiniaStore';
 import Connection from '../services/LoginDataService';
 
+const overlay = ref(false);
 const userStore = myUserStore();
+
+const closeOverlay = (newValue) => {
+  overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
+};
+
 const items= ref([
           {
             src: 'src/assets/biscocho_blanca.png',
@@ -110,7 +116,13 @@ const toggleFavorite = (item) => {
     ([...JSON.parse(userStore.uFavs), newFavorite]);
     console.log('Añadido a favoritos:', userStore.uFavs);
 
-    Connection.saveFavs({ ...userStore.$state }); //actualiza base d datos
+    const favsData = {
+      userEmail: userStore.uEmail,
+      userPassword: userStore.uPass,
+      userName: userStore.uName,
+      userFavs: userStore.uFavs
+      };
+      Connection.saveFavs(favsData);
   }
   else {
     item.isFavorite = false;
@@ -121,7 +133,13 @@ const toggleFavorite = (item) => {
     );
     console.log('Eliminado de favoritos:', userStore.uFavs);
 
-    Connection.saveFavs({ ...userStore.$state });
+    const favsData = {
+      userEmail: userStore.uEmail,
+      userPassword: userStore.uPass,
+      userName: userStore.uName,
+      userFavs: userStore.uFavs
+      };
+      Connection.saveFavs(favsData);
   }
 };
 
@@ -140,7 +158,7 @@ const cerrarFormulario = () => {
 
 <template>
 <div class="general_home">
-  <h2 class="h2_home">Nuestras Mierdas</h2>
+  <h1 class="h1_home">Nuestros Productos</h1>
   <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
@@ -165,8 +183,12 @@ const cerrarFormulario = () => {
 </div>
 <div class="btn_custom_block">
     <h2>O crea tu propio diseño</h2>
-    <v-btn class="btn_custom" rounded="xl" @click="abrirFormulario">Aquí</v-btn>
-    <FormComponent v-if="mostrarFormulario" @cerrarFormulario="cerrarFormulario" />
+    <v-btn class="btn_custom" rounded="xl" @click.stop="overlay = true">Aquí</v-btn>
+    <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="closeOverlay">
+      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
+        <FormComponent :overlay="overlay" @closeOverlay="closeOverlay" />
+      </div>
+    </v-overlay>
   </div>
 </div>
 </template>
@@ -186,6 +208,13 @@ const cerrarFormulario = () => {
   top: 90%;
   left: 60%;
   transform: translate(-50%, -50%);
+}
+.my-overlay-content {
+  padding: 4rem;
+  border-radius: 0.3rem;
+}
+.my-overlay-content::-webkit-scrollbar {
+  display: none;
 }
 .border-image {
   border-radius: 25px;
@@ -213,7 +242,7 @@ const cerrarFormulario = () => {
 
 }
 
-.h2_home{
+.h1_home{
   text-align: center;
   padding-bottom: 15px;
 }
