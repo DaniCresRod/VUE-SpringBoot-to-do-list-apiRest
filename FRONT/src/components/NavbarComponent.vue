@@ -3,7 +3,6 @@ import { ref, watch } from 'vue';
 import { RouterLink } from 'vue-router';
 import FormComponent from '@/components/FormComponent.vue';
 
-
 const drawer = ref(false);
 const group = ref(null);
 const overlay = ref(false);
@@ -30,7 +29,57 @@ const items = [
 watch(group, () => {
   drawer.value = false;
 });
+
+const closeOverlay = (newValue) => {
+  overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
+};
 </script>
+
+<template>
+  <div>
+    <v-app-bar color="primary" prominent>
+      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+
+        <v-toolbar-title class="text-no-wrap" title="Application">
+          <RouterLink to="/">
+            Tods List
+          </RouterLink>
+        </v-toolbar-title>
+
+      <v-spacer></v-spacer>
+
+      <RouterLink to="/favs">
+        <v-btn variant="text" icon="mdi mdi-heart"></v-btn>
+      </RouterLink>
+
+      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = true" ></v-btn>
+
+      <RouterLink to="/login">
+        <v-btn variant="text" icon="mdi mdi-account-circle-outline"></v-btn>
+      </RouterLink>
+
+    </v-app-bar>
+
+    <v-navigation-drawer v-model="drawer" location="top" temporary>
+      <v-list>
+        <RouterLink
+        class="itemList"
+        v-for="item in items"
+        :key="item.title"
+        :to="item.route"
+        >
+          {{ item.title }}
+        </RouterLink>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="closeOverlay">
+      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
+        <FormComponent :overlay="overlay" @closeOverlay="closeOverlay" />
+      </div>
+    </v-overlay>
+  </div>
+</template>
 
 <style scoped>
 .itemList {
@@ -55,45 +104,10 @@ watch(group, () => {
   display: none;
 }
 .my-navbar {
-   transition: opacity .5s ease-in-out;
+    transition: opacity .5s ease-in-out;
+}
+a{
+  text-decoration: none;
+  color: white;
 }
 </style>
-
-<template>
-  <div>
-    <v-app-bar color="primary" prominent>
-      <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-
-      <v-toolbar-title class="text-no-wrap" title="Application">Tods List</v-toolbar-title>
-
-      <v-spacer></v-spacer>
-
-      <RouterLink to="/favs">
-        <v-btn variant="text" icon="mdi-heart"></v-btn>
-      </RouterLink>
-
-      <v-btn variant="text" icon="mdi-pencil" @click.stop="overlay = !overlay"></v-btn>
-
-      <v-btn variant="text" icon="mdi-dots-vertical"></v-btn>
-    </v-app-bar>
-
-    <v-navigation-drawer v-model="drawer" location="top" temporary>
-      <v-list>
-        <RouterLink
-          class="itemList"
-          v-for="item in items"
-          :key="item.title"
-          :to="item.route"
-        >
-          {{ item.title }}
-        </RouterLink>
-      </v-list>
-    </v-navigation-drawer>
-
-    <v-overlay v-model="overlay" class="d-flex align-center justify-center" scrim="#000" @click:outside="overlay = false">
-      <div class="my-overlay-content" style="max-height: 80vh; overflow-y: auto; background-color: white; z-index: 2001;">
-        <FormComponent />
-      </div>
-    </v-overlay>
-  </div>
-</template>
