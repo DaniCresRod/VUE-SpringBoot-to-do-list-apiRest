@@ -131,18 +131,6 @@ a{
     background-size: cover;
     background-position: center;
 }
-.icon-navbar{
-  transition: 0.3s;
-}
-.icon-navbar:hover{
-  letter-spacing: 0.1rem;
-  color: orange;
-}
-.i-navbar{
-  transition: 0.3s;
-}
-.i-navbar:hover{
-  color: orange;
-  background-color: rgba(210, 210, 210, 0.3)
-}
+/* .v-main{padding-top: 0 !important;} */
+
 </style>
