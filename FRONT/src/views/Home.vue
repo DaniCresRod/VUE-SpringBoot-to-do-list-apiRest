@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import ProductData from "@/services/ProductDataService";
-
+import FormComponent from '@/components/FormComponent.vue'; 
 
 const items= ref([
           {
@@ -128,9 +128,21 @@ onBeforeMount(() => {
   favoriteProduct();
 });
 
+const mostrarFormulario = ref(false);
+
+const abrirFormulario = () => {
+  mostrarFormulario.value = true;
+};
+
+const cerrarFormulario = () => {
+  mostrarFormulario.value = false;
+};
+
 </script>
 
 <template>
+
+  <h2 class="h2_home">BLABLABALBALABLABALABALABLABALBALABLABALA</h2>
    <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
@@ -153,6 +165,11 @@ onBeforeMount(() => {
     </v-carousel-item>
   </v-carousel>
 </div>
+<div class="btn_custom_block">
+    <h2>O crea tu propio diseño</h2>
+    <v-btn class="btn_custom" rounded="xl" @click="abrirFormulario">Aquí</v-btn>
+    <FormComponent v-if="mostrarFormulario" @cerrarFormulario="cerrarFormulario" />
+  </div>
 </template>
 
 
@@ -174,5 +191,31 @@ onBeforeMount(() => {
 .border-image {
   border-radius: 25px;
   box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
+}
+
+.btn_custom {
+  margin-top: 15px;
+  text-decoration: none;
+  transition: 0.3s;
+  background-color: rgba(54, 157, 178, 0.7) !important;
+  color: white !important;
+  padding: 0 50px;
+  }
+  
+.btn_custom :hover{
+  letter-spacing: 0.15rem;
+  padding: 0 1rem;
+  font-weight: bolder;
+}
+
+.btn_custom_block{
+  text-align: center;
+  padding-top: 30px;
+  
+}
+
+.h2_home{
+  text-align: center;
+  padding-bottom: 15px;
 }
 </style>

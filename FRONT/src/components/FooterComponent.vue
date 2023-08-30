@@ -4,7 +4,7 @@ export default {
     links: [
       { name: 'Home', route: '/' },
       { name: 'Team', route: '/team' },
-      { name: 'Products', route: '/products' },
+      { name: 'Productos', route: '/products' },
 
     ],
   }),
