@@ -60,6 +60,9 @@ const closeOverlay = (newValue) => {
 
     </v-app-bar>
 
+    <!-- Aquí agregamos el banner de imagen con una condición para que solo se muestre en la página de inicio -->
+    <div v-if="$route.path === '/'" class="banner"></div>
+
     <v-navigation-drawer v-model="drawer" location="top" temporary>
       <v-list>
         <RouterLink
@@ -109,5 +112,14 @@ const closeOverlay = (newValue) => {
 a{
   text-decoration: none;
   color: white;
+}
+
+/* Aquí agregamos los estilos para el banner de imagen */
+.banner {
+    width: 100%;
+    height: 825px;
+    background-image: url('../../public/tshirts_edit.jpg');
+    background-size: cover;
+    background-position: center;
 }
 </style>
