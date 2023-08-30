@@ -1,9 +1,10 @@
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, defineProps, defineEmits } from "vue";
 import ProductData from "@/services/ProductDataService";
-import {myUserStore} from '@/services/PiniaStore'
+import { myUserStore } from '@/services/PiniaStore'
 import router from "@/router";
 import Connection from '../services/LoginDataService'
+
 
 const prodMessage = ref("");
 const messageRules = [
@@ -38,7 +39,9 @@ let isFormValid = computed(() => {
 });
 
 const form = ref("");
-const showConfirmation = ref(false); // Variable para controlar la visibilidad del mensaje de confirmación
+const showConfirmation = ref(false); // Controlar la visibilidad del mensaje de confirmación
+const overlay = defineProps(['overlay']); // Propiedad pasada desde el padre
+const emit = defineEmits(['closeOverlay']); // Emite el cambio de estado al padre
 
 const validateForm = async () => {
   if (isFormValid.value) {
@@ -55,7 +58,7 @@ const validateForm = async () => {
       });
 
       //Añadir en el PiniaStore el favorito
-      const userStore = myUserStore(); 
+      const userStore = myUserStore();
       let thisArticle={
         prodMessage: prodMessage.value,
         prodType: prodType.value,
@@ -82,7 +85,7 @@ const validateForm = async () => {
         if ((((eachComp.prodMessage).localeCompare(thisArticle.prodMessage))
           + ((eachComp.prodType).localeCompare(thisArticle.prodType))
           + ((eachComp.prodColor).localeCompare(thisArticle.prodColor)) === 0)) {
-          
+
           if (((eachComp.prodSize) === null) || ((thisArticle.prodSize) === null)) {
             if (((eachComp.prodSize) === null) && ((thisArticle.prodSize) === null)) {
               duplicated = true;
@@ -100,7 +103,7 @@ const validateForm = async () => {
 
       //Guardarlo todo en el userStore como string
       userStore.uFavs=JSON.stringify(favsArray.value);
-      
+
 
       if(userStore.uEmail!==''){
 
@@ -110,34 +113,19 @@ const validateForm = async () => {
         };
 
         try{
-          // const response=await Connection.create(data);
-          
-          // if(response.data!=""){
-            
-          //   router.push("/favs");
-          // }
-          // else{
-            
-          // }
-
           const favsData = {
           userEmail: userStore.uEmail,
           userPassword: userStore.uPass,
           userName: userStore.uName,
-          userFavs: userStore.uFavs 
+          userFavs: userStore.uFavs
         };
-
-        Connection.saveFavs(favsData);        
-
-        router.push("/favs");   
-          
-        }  
+        Connection.saveFavs(favsData);
+        router.push("/favs");
+        }
         catch(error){
           console.log(error);
-        }       
-
-      } 
-
+        }
+      }
 
       // Mostrar el mensaje de confirmación al enviar el form
       showConfirmation.value = true;
@@ -145,21 +133,18 @@ const validateForm = async () => {
       isFormValid = false;
 
       //Actualizar la página después de 1.5 segundos
-      // setTimeout(() => {
-      //   location.close();
-      //   //router.push("/favs");
-      //  }, 1500);
+      setTimeout(() => {
+        router.push("/");
+        emit('closeOverlay', false);
+       }, 1500);
 
     } catch (error) {
       console.log(error);
     }
   }
-
 };
 
 </script>
-
-Listas con <span></span>
 
 <template>
   <h2>Personaliza tu propio producto</h2>
