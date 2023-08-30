@@ -35,8 +35,10 @@ export default {
 .custom-footer {
   background: linear-gradient(to right, rgba(54, 157, 178, 1), rgba(195, 232, 236, 1));
   color: white;
-  padding: 20px; /* Ajusta el padding según tus necesidades */
-  height: auto !important; /* Ajusta la altura según tus necesidades */
+  padding: 20px; 
+  height: auto !important;
+  margin-top: 4rem;
+  
 }
 
 .links {
@@ -55,4 +57,6 @@ export default {
 .footerText {
   color: rgba(54, 157, 178, 1);
 }
+
+
 </style>
