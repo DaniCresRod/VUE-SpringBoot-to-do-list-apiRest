@@ -6,5 +6,5 @@ export const myUserStore=defineStore('userData', {
         uName:'',
         uPass:'',
         uFavs:''
-    }),       
+    }),
 });

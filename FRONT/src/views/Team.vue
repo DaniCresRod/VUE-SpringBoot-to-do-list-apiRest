@@ -1,4 +1,5 @@
-<script>
+<script setup>
+import CardItem from "@/components/TeamCardComponent.vue";
 
 </script>
 
@@ -62,7 +63,7 @@
 .teamGroup{
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 
 .imgInfo {
@@ -71,6 +72,6 @@
 }
 
 .teamItem {
-  flex: 0 0 calc(20% - 20px); 
+  flex: 0 0 calc(20% - 20px);
 }
 </style>

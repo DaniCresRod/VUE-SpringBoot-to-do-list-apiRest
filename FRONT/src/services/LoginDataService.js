@@ -6,7 +6,7 @@ export default({
         return axiosConnection.post(`/login/logo`, ProductData);
     },
 
-    signUp(ProductData){
+    SignUp(ProductData){
         return axiosConnection.post('/login/add', ProductData);
     },
 
