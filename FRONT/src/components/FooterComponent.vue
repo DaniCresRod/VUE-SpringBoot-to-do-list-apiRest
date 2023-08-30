@@ -25,7 +25,7 @@ export default {
         {{ link.name }}
       </router-link>
       <v-col class="text-center mt-4 footerText" cols="12">
-        {{ new Date().getFullYear() }} — <strong>ToDos List</strong>
+        {{ new Date().getFullYear() }} — <strong>ToDs List</strong>
       </v-col>
     </v-row>
   </v-footer>
