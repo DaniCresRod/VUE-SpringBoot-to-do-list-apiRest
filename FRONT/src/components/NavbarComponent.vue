@@ -33,6 +33,7 @@ watch(group, () => {
 const closeOverlay = (newValue) => {
   overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
 };
+
 </script>
 
 <template>
@@ -117,7 +118,8 @@ a{
 /* Aquí agregamos los estilos para el banner de imagen */
 .banner {
     width: 100%;
-    height: 825px;
+    height: 0;
+    padding-bottom: 61.8%; /* Relación de aspecto 1920x825 */
     background-image: url('../../public/tshirts_edit.jpg');
     background-size: cover;
     background-position: center;

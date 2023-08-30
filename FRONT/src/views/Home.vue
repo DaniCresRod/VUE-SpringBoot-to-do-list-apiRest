@@ -73,13 +73,13 @@ const favoriteProduct = () => {
       };
       Connection.saveFavs(favsData);
       
-     const updatedFavs = JSON.parse(userStore.uFavs);
+  const updatedFavs = JSON.parse(userStore.uFavs);
 
       updatedFavs.forEach((favItem) => {
       const matchingItem = items.value.find
       (item => item.name === favItem.prodMessage && item.color === favItem.prodColor && favItem.prodType === "Camiseta");
         if (matchingItem) {
-           matchingItem.isFavorite = true;
+          matchingItem.isFavorite = true;
         }
       });
     }
@@ -137,7 +137,7 @@ const toggleFavorite = (item) => {
 <template>
 
   <h2 class="h2_home">Nuestras Mierdas</h2>
-   <div class="carousel-container">
+  <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
       v-for="(item, i) in items"
