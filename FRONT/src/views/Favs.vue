@@ -5,33 +5,18 @@ import {myUserStore} from '@/services/PiniaStore';
 import Connection from '../services/LoginDataService';
 import router from "@/router"
 
-
 const cards = ref([]);
 const userStore = myUserStore();
 const favsArray= ref([]);
 
 const favoriteForm = async () => {
   try {
-    // const response = await ProductData.getAll();
-    //   cards.value = response.data.map(product => ({
-    //   id: product.id,
-    //   prodMessage: product.prodMessage,
-    //   prodType: product.prodType,
-    //   prodSize: product.prodSize,
-    //   prodColor: product.prodColor,
-    //   src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
-    //   }));
-
-   
-    //Si hay favoritos, meterlos en un array como objetos JS
       if(userStore.uFavs!==''){
         (JSON.parse(userStore.uFavs)).forEach(element => {
           favsArray.value.push(element);
         });
 
-        console.log(favsArray.value);
         cards.value = favsArray.value.map(product => ({
-        //id: product.id,
         prodMessage: product.prodMessage,
         prodType: product.prodType,
         prodSize: product.prodSize,
@@ -42,16 +27,6 @@ const favoriteForm = async () => {
   } 
   catch (error) {
     console.log(error);
-  }
-};
-
-const cancelfavorite = async (productId) => {
-  try {
-    await ProductData.delete(productId);
-    console.log("Eliminado de favoritos");
-
-  } catch (error) {
-    console.log("No se ha podido eliminar de favoritos", error);
   }
 };
 

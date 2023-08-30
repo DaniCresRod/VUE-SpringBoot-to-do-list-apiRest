@@ -8,7 +8,6 @@ const cards = ref([]);
 const tab = ref("all");
 
 const generateSrc = (prodType) => {
-  // Define las rutas de las imágenes para cada tipo de producto.
   const placeholderImages = {
     Camiseta: "https://www.monsterstoys.com/wp-content/uploads/2023/02/CAMISETA-NEGRA-e1676027065965.jpg",
     Sudadera: "https://static.wixstatic.com/media/f279e0_717c28f4e9754363ad5405f2e413de17~mv2.jpg/v1/fill/w_530,h_530,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/f279e0_717c28f4e9754363ad5405f2e413de17~mv2.jpg",
@@ -16,7 +15,6 @@ const generateSrc = (prodType) => {
     Botella: "https://www.regalospublicitarios.com/65901-thickbox_default/botella-de-aluminio-750-ml-big-moss.jpg",
   };
 
-  // Si prodType se encuentra en placeholderImages, usa su URL, de lo contrario, usa una URL de imagen de marcador de posición genérica.
   return placeholderImages[prodType] || "https://ruta-de-tu-servidor/placeholder-generic.jpg";
 };
 
@@ -38,8 +36,6 @@ const favoriteForm = async () => {
   }
 };
 
-
-
 const filteredCards = (type) => {
   return cards.value.filter((card) => type === 'all' || card.prodType === type);
 };
@@ -47,7 +43,6 @@ const filteredCards = (type) => {
 const cancelfavorite = async (productId) => {
   try {
     await ProductData.delete(productId);
-    console.log("Eliminado de favoritos");
     setTimeout(() => {
       location.reload();
       alert("Producto eliminado correctamente")
@@ -58,8 +53,6 @@ const cancelfavorite = async (productId) => {
 };
 
 onMounted(favoriteForm);
-
-
 </script>
 
 <template>
@@ -125,6 +118,7 @@ onMounted(favoriteForm);
 </template>
 
 <style>
+
 .v-slide-group__content{
   display: flex;
   justify-content: center;

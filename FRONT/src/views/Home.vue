@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
-import ProductData from "@/services/ProductDataService";
 import FormComponent from '@/components/FormComponent.vue';
 import {myUserStore} from '@/services/PiniaStore';
 import Connection from '../services/LoginDataService';
@@ -9,7 +8,7 @@ const overlay = ref(false);
 const userStore = myUserStore();
 
 const closeOverlay = (newValue) => {
-  overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
+  overlay.value = newValue; 
 };
 
 const items= ref([
@@ -69,7 +68,7 @@ const items= ref([
           },
         ]);
 
-        const favoriteProduct = () => {
+  const favoriteProduct = () => {
   if(userStore.uEmail!== ''){
     try{
       const favsData = {
@@ -114,7 +113,6 @@ const toggleFavorite = (item) => {
     };
     userStore.uFavs = JSON.stringify
     ([...JSON.parse(userStore.uFavs), newFavorite]);
-    console.log('Añadido a favoritos:', userStore.uFavs);
 
     const favsData = {
       userEmail: userStore.uEmail,
@@ -131,7 +129,6 @@ const toggleFavorite = (item) => {
         favItem.prodMessage !== item.name || favItem.prodColor !== item.color
       )
     );
-    console.log('Eliminado de favoritos:', userStore.uFavs);
 
     const favsData = {
       userEmail: userStore.uEmail,
@@ -202,20 +199,24 @@ const cerrarFormulario = () => {
   filter: grayscale(50%);
   opacity: 70%;
   backdrop-filter: blur(50px);
-  }
+}
+
 .favorite-button {
   position: absolute;
   top: 90%;
   left: 60%;
   transform: translate(-50%, -50%);
 }
+
 .my-overlay-content {
   padding: 4rem;
   border-radius: 0.3rem;
 }
+
 .my-overlay-content::-webkit-scrollbar {
   display: none;
 }
+
 .border-image {
   border-radius: 25px;
   box-shadow: 0px 3px 1px -2px var(--v-shadow-key-umbra-opacity, rgba(0, 0, 0, 0.2)), 0px 2px 2px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.14)), 0px 1px 5px 0px var(--v-shadow-key-penumbra-opacity, rgba(0, 0, 0, 0.12));
@@ -239,7 +240,6 @@ const cerrarFormulario = () => {
 .btn_custom_block{
   text-align: center;
   padding-top: 30px;
-
 }
 
 .h1_home{
@@ -250,6 +250,7 @@ const cerrarFormulario = () => {
 .v-btn{
   margin-bottom: 25px ;
 }
+
 .v-main{
   margin-top: 0px !important;
 }

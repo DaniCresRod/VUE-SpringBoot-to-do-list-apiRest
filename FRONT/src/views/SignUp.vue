@@ -37,7 +37,6 @@ function navigateBack() {
 async function SignUp() {
 
   if (myEmail.value != null) {
-
     const data = {
       userEmail: myEmail.value,
       userPassword: myPass.value,
@@ -47,14 +46,11 @@ async function SignUp() {
 
     try {
       const response = await Connection.SignUp(data);
-      console.log(response.data);
       if (response.data === "") {
 
-        //Incluir mensaje de que ya existe ese usuario (con TimeOut)
         router.push("/SignUp");
       }
       else {
-        //Querria decir que es un usuario nuevo, se ha dado de alta ya y los datos estan en pinia
         userStore.uName=response.data.userName;
         userStore.uEmail=response.data.userEmail;
         userStore.uPass=response.data.userPassword;
@@ -74,7 +70,6 @@ async function SignUp() {
     catch (error) {
       console.log(error);
     }
-
   }
 }
 

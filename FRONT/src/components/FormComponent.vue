@@ -25,7 +25,6 @@ const prodColor = ref("");
 const checkbox = ref(false);
 const favsArray= ref([]);
 
-// Función validación para activar/desactivar el botón de envío de formulario
 let isFormValid = computed(() => {
   return (
     prodMessage.value.length > 0 &&
@@ -39,9 +38,9 @@ let isFormValid = computed(() => {
 });
 
 const form = ref("");
-const showConfirmation = ref(false); // Variable para controlar la visibilidad del mensaje de confirmación
-const overlay = defineProps(['overlay']); // Propiedad pasada desde el padre
-const emit = defineEmits(['closeOverlay']); // Emite un evento al padre
+const showConfirmation = ref(false); 
+const overlay = defineProps(['overlay']); 
+const emit = defineEmits(['closeOverlay']); 
 
 const validateForm = async () => {
   if (isFormValid.value) {
@@ -57,7 +56,6 @@ const validateForm = async () => {
         terms: checkbox.value,
       });
 
-      //Añadir en el PiniaStore el favorito
       const userStore = myUserStore();
       let thisArticle={
         prodMessage: prodMessage.value,
@@ -69,19 +67,16 @@ const validateForm = async () => {
         prodColor: prodColor.value,
         terms: checkbox.value
       }
-
-      console.log(userStore.uFavs);
-      //Si hay favoritos, meterlos en un array como objetos JS
+      
       if(userStore.uFavs!==''){
         (JSON.parse(userStore.uFavs)).forEach(element => {
           favsArray.value.push(element);
         });
       }
+
       let duplicated = false;
       (favsArray.value).forEach(eachComp => {
 
-        //Revisa cada valor de cada componente del array y lo compara con los favoritos
-        //Si encuentra alguna coincidencia total, no deja que ese elemento se guarde
         if ((((eachComp.prodMessage).localeCompare(thisArticle.prodMessage))
           + ((eachComp.prodType).localeCompare(thisArticle.prodType))
           + ((eachComp.prodColor).localeCompare(thisArticle.prodColor)) === 0)) {
@@ -101,56 +96,31 @@ const validateForm = async () => {
         favsArray.value.push(thisArticle);
       }
 
-      //Guardarlo todo en el userStore como string
       userStore.uFavs=JSON.stringify(favsArray.value);
 
-
       if(userStore.uEmail!==''){
-
         const data = {
           userEmail: userStore.uEmail,
           userPassword: userStore.uPass
         };
 
         try{
-          // const response=await Connection.create(data);
-
-          // if(response.data!=""){
-
-          //   router.push("/favs");
-          // }
-          // else{
-
-          // }
-
           const favsData = {
           userEmail: userStore.uEmail,
           userPassword: userStore.uPass,
           userName: userStore.uName,
           userFavs: userStore.uFavs
         };
-
         Connection.saveFavs(favsData);
-
-        // router.push("/");
-        // router.push("/favs");
-
         }
         catch(error){
           console.log(error);
         }
-
       }
 
-
-
-
-      // Mostrar el mensaje de confirmación al enviar el form
       showConfirmation.value = true;
-      // Deasctivar el botón al enviar el form
       isFormValid = false;
 
-      //Actualizar la página después de 1.5 segundos
       setTimeout(() => {
         emit('closeOverlay', false);
         router.push("/");
@@ -160,12 +130,8 @@ const validateForm = async () => {
       console.log(error);
     }
   }
-
 };
-
 </script>
-
-Listas con <span></span>
 
 <template>
   <h2>Personaliza tu propio producto</h2>
@@ -210,13 +176,11 @@ Listas con <span></span>
       ></v-checkbox>
 
       <div class="d-flex flex-column">
-        <!-- Botón con validación -->
         <v-btn ref="formBtn" class="mt-4" block :disabled="!isFormValid" @click="validateForm">
           Enviar Modelo
         </v-btn>
       </div>
 
-      <!-- Mensaje de confirmación -->
       <div v-if="showConfirmation" class="confirMessage">
         ¡El formulario se ha enviado correctamente!
       </div>
@@ -232,16 +196,20 @@ Listas con <span></span>
   background-color: rgba(54, 157, 178, 1);
   color: white;
 }
-.mt-4:hover{
 
+.mt-4:hover{
   letter-spacing: 0.15rem;
   padding: 0 1rem;
   font-weight: bolder;
 }
+
 .confirMessage {
   color: green;
   margin-top: 10px;
 }
-h2{text-align: center;
-padding: 10px 0px 35px;}
+
+h2{
+  text-align: center;
+  padding: 10px 0px 35px;
+}
 </style>

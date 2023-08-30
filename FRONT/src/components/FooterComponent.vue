@@ -5,11 +5,11 @@ export default {
       { name: 'Home', route: '/' },
       { name: 'Team', route: '/team' },
       { name: 'Productos', route: '/products' },
-
     ],
   }),
 };
 </script>
+
 <template>
   <v-footer class="custom-footer">
     <v-row justify="center" no-gutters>
@@ -38,7 +38,6 @@ export default {
   padding: 20px; 
   height: auto !important;
   margin-top: 4rem;
-  
 }
 
 .links {
@@ -57,6 +56,4 @@ export default {
 .footerText {
   color: rgba(54, 157, 178, 1);
 }
-
-
 </style>

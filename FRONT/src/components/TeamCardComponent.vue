@@ -10,8 +10,7 @@
   });
 
   const show = ref(false);
-
-  </script>
+</script>
 
 <template>
   <v-card class="mx-auto cardTeam" width="225" >
@@ -45,8 +44,6 @@
 
 .cardTeam {
   margin-top: 1rem;
-  
-
 }
 
 .content{

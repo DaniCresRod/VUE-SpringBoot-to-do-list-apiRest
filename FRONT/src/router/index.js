@@ -1,4 +1,3 @@
-
 import Home from '@/views/Home.vue'
 import Favs from '@/views/Favs.vue'
 import Login from '@/views/Login.vue'
@@ -7,7 +6,6 @@ import SignUp from '@/views/SignUp.vue'
 import Team from '@/views/Team.vue'
 import NoRouter from '@/views/NoRouter.vue'
 import Refresh from '@/views/FavsRefresh.vue'
-
 
 import { createRouter, createWebHistory } from 'vue-router'
 

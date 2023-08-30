@@ -31,9 +31,8 @@ watch(group, () => {
 });
 
 const closeOverlay = (newValue) => {
-  overlay.value = newValue; // Cambiar el valor de overlay según el evento emitido por el hijo
+  overlay.value = newValue; 
 };
-
 </script>
 
 <template>
@@ -61,7 +60,6 @@ const closeOverlay = (newValue) => {
 
     </v-app-bar>
 
-    <!-- Aquí agregamos el banner de imagen con una condición para que solo se muestre en la página de inicio -->
     <div v-if="$route.path === '/'" class="banner"></div>
 
     <v-navigation-drawer v-model="drawer" location="top" temporary>
@@ -92,11 +90,13 @@ const closeOverlay = (newValue) => {
   padding-left: 10px;
   padding-top: 15px;
 }
+
 .itemList:hover {
   letter-spacing: 0.3rem;
   font-weight: bolder;
   background-color:rgba(54, 157, 178, 0.2); 
 }
+
 .v-list {
   display: flex;
   flex-direction: column;
@@ -104,13 +104,16 @@ const closeOverlay = (newValue) => {
   margin-left: 1rem;
   padding-top: 1.1rem;
 }
+
 .my-overlay-content {
   padding: 4rem;
   border-radius: 0.3rem;
 }
+
 .my-overlay-content::-webkit-scrollbar {
   display: none;
 }
+
 .my-navbar {
     transition: opacity .5s ease-in-out;
 }
@@ -120,15 +123,12 @@ a{
   color: white;
 }
 
-/* Aquí agregamos los estilos para el banner de imagen */
 .banner {
     width: 100%;
     height: 0;
-    padding-bottom: 61.8%; /* Relación de aspecto 1920x825 */
+    padding-bottom: 61.8%; 
     background-image: url('../../public/tshirts_edit.jpg');
     background-size: cover;
     background-position: center;
 }
-/* .v-main{padding-top: 0 !important;} */
-
 </style>

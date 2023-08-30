@@ -8,12 +8,11 @@ export default({
 
     getAll(params) {
         return http.get(`/product`, { params });
-      },
+    },
       
     getById(productId) {
         return http.get(`/product/${productId}`);
     },
-    
     
     update(productId, ProductData) {
         return http.put(`/product/update/${productId}`, ProductData);
