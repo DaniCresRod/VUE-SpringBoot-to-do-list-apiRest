@@ -1,8 +1,11 @@
 <script setup>
 import { ref, onBeforeMount } from 'vue';
 import ProductData from "@/services/ProductDataService";
-import FormComponent from '@/components/FormComponent.vue'; 
+import FormComponent from '@/components/FormComponent.vue';
+import {myUserStore} from '@/services/PiniaStore';
+import Connection from '../services/LoginDataService';
 
+const userStore = myUserStore();
 const items= ref([
           {
             src: 'src/assets/biscocho_blanca.png',
@@ -60,73 +63,67 @@ const items= ref([
           },
         ]);
 
-const isFavorite = (item) => {
-  return item.isFavorite;
-};
+        const favoriteProduct = () => {
+  if(userStore.uEmail!== ''){
+    try{
+      const favsData = {
+      userEmail: userStore.uEmail,
+      userPassword: userStore.uPass,
+      userName: userStore.uName,
+      userFavs: userStore.uFavs
+      };
+      Connection.saveFavs(favsData);
 
-const toggleFavorite = async (item) => {
-  if (!item.isFavorite) {
-    item.isFavorite = true;
-  
-    try {
-      const response = await ProductData.create({
-        prodMessage: item.name,
-        prodSize: " ",
-        prodType: "Camiseta",
-        prodColor: item.color
-      });
-      console.log('Añadido a favoritos:', response.data);
-    } catch (error) {
-      console.log('Error', error);
-    }
-  
-  } else {
-      item.isFavorite = false;
+     const updatedFavs = JSON.parse(userStore.uFavs);
 
-    try {
-      const response = await ProductData.getAll();
-      const dataFromServer = response.data;
-      
-      const matchingItem = dataFromServer.find((serverItem) =>
-          serverItem.prodMessage === item.name &&
-          serverItem.prodColor === item.color &&
-          serverItem.prodType === "Camiseta"
-      );
-
+      updatedFavs.forEach((favItem) => {
+      const matchingItem = items.value.find
+      (item => item.name === favItem.prodMessage && item.color === favItem.prodColor && favItem.prodType === "Camiseta");
         if (matchingItem) {
-          try {
-            await ProductData.delete(matchingItem.id);
-            console.log("Eliminado de favoritos");
-          } catch (error) {
-            console.log("No se ha podido eliminar de favoritos", error);
-          }
+           matchingItem.isFavorite = true;
         }
-    } catch (error) {
+      });
+    }
+    catch(error){
       console.log(error);
     }
   }
 };
-
-const favoriteProduct = async () => {
-  try {
-    const response = await ProductData.getAll();
-    const dataFromServer = response.data;
-    console.log(dataFromServer);
-    
-    dataFromServer.forEach(serverItem => {
-      const matchingItem = items.value.find
-      (item => item.name === serverItem.prodMessage && item.color === serverItem.prodColor && serverItem.prodType === "Camiseta");
-      if (matchingItem) {
-        matchingItem.isFavorite = true;
-      }
-          });
-      } catch (error) {
-        console.log(error);
-      }
-    };
 onBeforeMount(() => {
   favoriteProduct();
 });
+
+const isFavorite = (item) => {
+  return item.isFavorite;
+};
+
+const toggleFavorite = (item) => {
+  if (!item.isFavorite) {
+    item.isFavorite = true;
+    const newFavorite = {
+      prodMessage: item.name,
+      prodSize: ' ',
+      prodColor: item.color,
+      prodType: "Camiseta",
+    };
+    userStore.uFavs = JSON.stringify
+    ([...JSON.parse(userStore.uFavs), newFavorite]);
+    console.log('Añadido a favoritos:', userStore.uFavs);
+
+    Connection.saveFavs({ ...userStore.$state }); //actualiza base d datos
+  }
+  else {
+    item.isFavorite = false;
+    userStore.uFavs = JSON.stringify(
+      JSON.parse(userStore.uFavs).filter((favItem) =>
+        favItem.prodMessage !== item.name || favItem.prodColor !== item.color
+      )
+    );
+    console.log('Eliminado de favoritos:', userStore.uFavs);
+
+    Connection.saveFavs({ ...userStore.$state });
+  }
+};
 
 const mostrarFormulario = ref(false);
 
@@ -177,13 +174,13 @@ const cerrarFormulario = () => {
 
 <style scoped>
 .carousel-container {
-  background-image: url('/tshirt_back.jpg'); 
-  background-size: cover; 
+  background-image: url('/tshirt_back.jpg');
+  background-size: cover;
   background-position: center;
   filter: grayscale(50%);
   opacity: 70%;
   backdrop-filter: blur(50px);
-  } 
+  }
 .favorite-button {
   position: absolute;
   top: 90%;
@@ -203,7 +200,7 @@ const cerrarFormulario = () => {
   color: white !important;
   padding: 0 50px;
   }
-  
+
 .btn_custom :hover{
   letter-spacing: 0.15rem;
   padding: 0 1rem;
@@ -213,7 +210,7 @@ const cerrarFormulario = () => {
 .btn_custom_block{
   text-align: center;
   padding-top: 30px;
-  
+
 }
 
 .h2_home{
