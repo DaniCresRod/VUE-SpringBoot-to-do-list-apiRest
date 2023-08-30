@@ -42,11 +42,11 @@ async function SignUp() {
       userEmail: myEmail.value,
       userPassword: myPass.value,
       userName: userName.value,
-      userFavs: userStore.uFavs 
+      userFavs: userStore.uFavs
     };
 
     try {
-      const response = await Connection.signUp(data);
+      const response = await Connection.SignUp(data);
       console.log(response.data);
       if (response.data === "") {
 
@@ -63,12 +63,12 @@ async function SignUp() {
           userEmail: userStore.uEmail,
           userPassword: userStore.uPass,
           userName: userStore.uName,
-          userFavs: userStore.uFavs 
+          userFavs: userStore.uFavs
         };
 
-        Connection.saveFavs(favsData);        
+        Connection.saveFavs(favsData);
 
-        router.push("/favs");        
+        router.push("/favs");
       }
     }
     catch (error) {
