@@ -169,8 +169,8 @@ async function Login(){
           Acceder
         </v-btn>
 
-         <!-- Mensaje de confirmación -->
-         <div v-if="showConfirmation" class="confirMessage">
+        <!-- Mensaje de confirmación -->
+        <div v-if="showConfirmation" class="confirMessage">
           El usuario no existe.
         </div>
 
@@ -190,9 +190,17 @@ async function Login(){
     </div>
   </template>
 
-<style>
+<style scoped>
 .confirMessage {
   color: red;
   margin-top: 10px;
 }
+a{
+  text-decoration: none;
+  font-weight: bolder;
+  font-size: 1.2rem;
+}
+a:visited{
+  color:rgba(54, 157, 178, 1);
+ }
 </style>

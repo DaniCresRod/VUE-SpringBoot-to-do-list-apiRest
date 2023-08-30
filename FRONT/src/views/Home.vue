@@ -142,7 +142,7 @@ const cerrarFormulario = () => {
 
 
 <template>
-
+<div class="general_home">
   <h2 class="h2_home">Nuestras Mierdas</h2>
   <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
@@ -171,10 +171,11 @@ const cerrarFormulario = () => {
     <v-btn class="btn_custom" rounded="xl" @click="abrirFormulario">Aquí</v-btn>
     <FormComponent v-if="mostrarFormulario" @cerrarFormulario="cerrarFormulario" />
   </div>
+</div>
 </template>
 
 
-<style>
+<style scoped>
 .carousel-container {
   background-image: url('/tshirt_back.jpg'); 
   background-size: cover; 
@@ -222,5 +223,8 @@ const cerrarFormulario = () => {
 
 .v-btn{
   margin-bottom: 25px ;
+}
+.v-main{
+  margin-top: 0px !important;
 }
 </style>

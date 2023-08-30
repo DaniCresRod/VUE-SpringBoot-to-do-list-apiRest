@@ -64,6 +64,13 @@ import CardItem from "@/components/TeamCardComponent.vue";
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  }
+
+@media (max-width: 768px) {
+  .teamGroup {
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
 }
 
 .imgInfo {

@@ -89,16 +89,20 @@ const closeOverlay = (newValue) => {
 .itemList {
   text-decoration: none;
   color: rgba(54, 157, 178, 1);
+  padding-left: 10px;
+  padding-top: 15px;
 }
 .itemList:hover {
   letter-spacing: 0.3rem;
   font-weight: bolder;
+  background-color:rgba(54, 157, 178, 0.2); 
 }
 .v-list {
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
   margin-left: 1rem;
+  padding-top: 1.1rem;
 }
 .my-overlay-content {
   padding: 4rem;
@@ -110,6 +114,7 @@ const closeOverlay = (newValue) => {
 .my-navbar {
     transition: opacity .5s ease-in-out;
 }
+
 a{
   text-decoration: none;
   color: white;

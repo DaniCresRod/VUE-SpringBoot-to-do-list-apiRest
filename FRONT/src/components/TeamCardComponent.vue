@@ -45,6 +45,8 @@
 
 .cardTeam {
   margin-top: 1rem;
+  
+
 }
 
 .content{
