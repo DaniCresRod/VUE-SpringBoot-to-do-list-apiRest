@@ -14,7 +14,7 @@
 
 <template>
   <v-card class="mx-auto cardTeam" width="225" >
-    <v-img :src="imageSrc" height="200px" cover></v-img>
+    <!-- <v-img :src="imageSrc" height="200px" cover></v-img> -->
 
     <v-card-title>{{ title }}</v-card-title>
 
