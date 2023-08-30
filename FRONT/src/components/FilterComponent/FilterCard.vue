@@ -4,10 +4,7 @@ export default {
     card: Object
   },
   methods: {
-    // Aquí puedes agregar tus métodos como cancelfavorite
     cancelfavorite(productId) {
-      // Realiza la lógica necesaria utilizando productId y card
-      // Por ejemplo, puedes emitir un evento personalizado
       this.$emit("cancel-favorite", productId);
     }
   }

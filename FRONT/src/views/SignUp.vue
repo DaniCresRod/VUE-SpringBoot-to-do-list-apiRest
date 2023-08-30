@@ -2,7 +2,9 @@
 import { ref } from 'vue';
 import Connection from '../services/LoginDataService'
 import router from "@/router"
+import {myUserStore} from '@/services/PiniaStore'
 
+const userStore = myUserStore();
 
 const agreement = ref(false);
 const dialog = ref(false);
@@ -39,18 +41,34 @@ async function SignUp() {
     const data = {
       userEmail: myEmail.value,
       userPassword: myPass.value,
-      userName: userName.value
-
+      userName: userName.value,
+      userFavs: userStore.uFavs 
     };
 
     try {
       const response = await Connection.signUp(data);
       console.log(response.data);
-      if (response.data == "") {
-        location.reload();
+      if (response.data === "") {
+
+        //Incluir mensaje de que ya existe ese usuario (con TimeOut)
+        router.push("/SignUp");
       }
       else {
-        router.push("/favorites");        
+        //Querria decir que es un usuario nuevo, se ha dado de alta ya y los datos estan en pinia
+        userStore.uName=response.data.userName;
+        userStore.uEmail=response.data.userEmail;
+        userStore.uPass=response.data.userPassword;
+
+        const favsData = {
+          userEmail: userStore.uEmail,
+          userPassword: userStore.uPass,
+          userName: userStore.uName,
+          userFavs: userStore.uFavs 
+        };
+
+        Connection.saveFavs(favsData);        
+
+        router.push("/favs");        
       }
     }
     catch (error) {
@@ -121,4 +139,3 @@ async function SignUp() {
     </v-dialog>
   </v-card>
 </template>
-

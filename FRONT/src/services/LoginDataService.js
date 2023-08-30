@@ -8,6 +8,9 @@ export default({
 
     signUp(ProductData){
         return axiosConnection.post('/login/add', ProductData);
+    },
+
+    saveFavs(ProductData){
+        return axiosConnection.post('/login/favs', ProductData);
     }
 })
-

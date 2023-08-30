@@ -2,6 +2,7 @@
 import { ref, onBeforeMount } from 'vue';
 import ProductData from "@/services/ProductDataService";
 
+
 const items= ref([
           {
             src: 'src/assets/biscocho_blanca.png',
@@ -130,6 +131,7 @@ onBeforeMount(() => {
 </script>
 
 <template>
+   <div class="carousel-container">
   <v-carousel hide-delimiters hide-delimiter-bg>
     <v-carousel-item
       v-for="(item, i) in items"
@@ -150,9 +152,19 @@ onBeforeMount(() => {
       </v-btn>
     </v-carousel-item>
   </v-carousel>
+</div>
 </template>
 
-<style scoped>
+
+<style>
+.carousel-container {
+  background-image: url('/tshirt_back.jpg'); 
+  background-size: cover; 
+  background-position: center;
+  filter: grayscale(50%);
+  opacity: 70%;
+  backdrop-filter: blur(50px);
+  } 
 .favorite-button {
   position: absolute;
   top: 90%;

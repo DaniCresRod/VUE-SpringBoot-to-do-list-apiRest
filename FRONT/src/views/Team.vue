@@ -1,11 +1,5 @@
 <script>
-import CardItem from "@/components/TeamComponent.vue";
 
-export default {
-  components: {
-    CardItem,
-  },
-};
 </script>
 
 <template>

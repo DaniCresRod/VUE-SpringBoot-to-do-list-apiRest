@@ -1,3 +1,64 @@
+<script setup>
+import { ref, watch } from 'vue';
+import { RouterLink } from 'vue-router';
+import FormComponent from '@/components/FormComponent.vue';
+
+
+const drawer = ref(false);
+const group = ref(null);
+const overlay = ref(false);
+
+const items = [
+  {
+    title: 'Home',
+    route: '/',
+  },
+  {
+    title: 'Team',
+    route: '/team',
+  },
+  {
+    title: 'Products',
+    route: '/products',
+  },
+  {
+    title: 'Login',
+    route: '/login',
+  },
+];
+
+watch(group, () => {
+  drawer.value = false;
+});
+</script>
+
+<style scoped>
+.itemList {
+  text-decoration: none;
+  color: rgba(54, 157, 178, 1);
+}
+.itemList:hover {
+  letter-spacing: 0.60rem;
+  font-weight: bolder;
+}
+.v-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-left: 1rem;
+}
+.my-overlay-content {
+  padding: 4rem;
+  border-radius: 0.3rem;
+}
+.my-overlay-content::-webkit-scrollbar {
+  display: none;
+}
+.my-navbar {
+   transition: opacity .5s ease-in-out;
+}
+</style>
+
 <template>
   <div>
     <v-app-bar color="primary" prominent>
@@ -7,7 +68,7 @@
 
       <v-spacer></v-spacer>
 
-      <RouterLink to="/favorites">
+      <RouterLink to="/favs">
         <v-btn variant="text" icon="mdi-heart"></v-btn>
       </RouterLink>
 
@@ -36,66 +97,3 @@
     </v-overlay>
   </div>
 </template>
-
-<script setup>
-import { ref, watch } from 'vue';
-import { RouterLink } from 'vue-router';
-import FormComponent from '@/components/FormComponent.vue';
-
-const drawer = ref(false);
-const group = ref(null);
-const overlay = ref(false);
-
-const items = [
-  {
-    title: 'Home',
-    route: '/',
-  },
-  {
-    title: 'Team',
-    route: '/team',
-  },
-  {
-    title: 'Services',
-    route: '/services',
-  },
-  {
-    title: 'Contact Us',
-    route: '/contact',
-  },
-  {
-    title: 'Login',
-    route: '/login',
-  },
-];
-
-watch(group, () => {
-  drawer.value = false;
-});
-
-</script>
-
-<style>
-.itemList {
-  text-decoration: none;
-  color: rgba(54, 157, 178, 1);
-}
-.itemList:hover {
-  letter-spacing: 0.60rem;
-  font-weight: bolder;
-}
-.v-list {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-left: 1rem;
-}
-.my-overlay-content {
-  padding: 4rem;
-  border-radius: 0.3rem;
-}
-.my-overlay-content::-webkit-scrollbar {
-  display: none;
-}
-
-</style>
