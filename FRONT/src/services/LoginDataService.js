@@ -13,4 +13,6 @@ export default({
     saveFavs(ProductData){
         return axiosConnection.post('/login/favs', ProductData);
     }
+
+    
 })

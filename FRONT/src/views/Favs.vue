@@ -39,8 +39,6 @@ const favoriteForm = async () => {
         src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg', flex: 12,
         }));
       }  
-
-
   } 
   catch (error) {
     console.log(error);
@@ -132,5 +130,4 @@ favoriteForm();
         </v-row>
       </v-container>
     </v-card>
-    
-  </template>
+</template>
