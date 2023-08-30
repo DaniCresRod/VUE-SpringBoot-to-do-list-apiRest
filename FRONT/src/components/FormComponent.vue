@@ -39,9 +39,9 @@ let isFormValid = computed(() => {
 });
 
 const form = ref("");
-const showConfirmation = ref(false); // Controlar la visibilidad del mensaje de confirmación
+const showConfirmation = ref(false); // Variable para controlar la visibilidad del mensaje de confirmación
 const overlay = defineProps(['overlay']); // Propiedad pasada desde el padre
-const emit = defineEmits(['closeOverlay']); // Emite el cambio de estado al padre
+const emit = defineEmits(['closeOverlay']); // Emite un evento al padre
 
 const validateForm = async () => {
   if (isFormValid.value) {
@@ -113,19 +113,34 @@ const validateForm = async () => {
         };
 
         try{
+          // const response=await Connection.create(data);
+
+          // if(response.data!=""){
+
+          //   router.push("/favs");
+          // }
+          // else{
+
+          // }
+
           const favsData = {
           userEmail: userStore.uEmail,
           userPassword: userStore.uPass,
           userName: userStore.uName,
           userFavs: userStore.uFavs
         };
+
         Connection.saveFavs(favsData);
+
         router.push("/favs");
+
         }
         catch(error){
           console.log(error);
         }
+
       }
+
 
       // Mostrar el mensaje de confirmación al enviar el form
       showConfirmation.value = true;
@@ -134,7 +149,6 @@ const validateForm = async () => {
 
       //Actualizar la página después de 1.5 segundos
       setTimeout(() => {
-        router.push("/");
         emit('closeOverlay', false);
        }, 1500);
 
@@ -142,9 +156,12 @@ const validateForm = async () => {
       console.log(error);
     }
   }
+
 };
 
 </script>
+
+Listas con <span></span>
 
 <template>
   <h2>Personaliza tu propio producto</h2>
